@@ -241,8 +241,9 @@ input::placeholder,textarea::placeholder{color:#b8ccbf;font-weight:600;}
 .syarat{background:#fffbea;border:2px solid #ffe680;border-radius:14px;padding:16px 17px;animation:fadeUp .35s .2s ease both;}
 .syarat h4{font-size:13px;font-weight:800;color:#7a5f00;margin-bottom:9px;display:flex;align-items:center;gap:5px;}
 .syarat ul{list-style:none;display:flex;flex-direction:column;gap:5px;}
-.syarat li{font-size:12px;color:#5a4400;display:flex;align-items:flex-start;gap:6px;line-height:1.55;}
+.syarat li{font-size:12px;color:#5a4400;display:flex;align-items:flex-start;gap:6px;line-height:1.6;}
 .syarat li::before{content:'✅';font-size:11px;margin-top:2px;flex-shrink:0;}
+.syarat li span{flex:1;}
 .agree-row{display:flex;align-items:center;gap:9px;margin-top:13px;padding-top:13px;border-top:1px solid #ffe680;}
 .agree-row input[type="checkbox"]{width:17px;height:17px;accent-color:var(--green);cursor:pointer;flex-shrink:0;}
 .agree-row label{font-size:12px;font-weight:700;color:#5a4400;cursor:pointer;line-height:1.4;}
@@ -277,6 +278,72 @@ input::placeholder,textarea::placeholder{color:#b8ccbf;font-weight:600;}
 footer{text-align:center;color:var(--muted);font-size:12px;font-weight:600;padding:4px 16px 28px;}
 footer span{color:var(--green-dark);}
 
+/* FILE SIZE WARNING */
+.file-size-warn{
+  display:flex;align-items:flex-start;gap:7px;
+  background:#fff8e6;border:1.5px solid #ffd066;
+  border-radius:9px;padding:8px 11px;margin-top:5px;
+  font-size:11px;font-weight:700;color:#7a5200;line-height:1.5;
+  animation:fadeUp .2s ease;
+}
+.file-size-warn .warn-icon{font-size:14px;flex-shrink:0;margin-top:1px;}
+.file-size-ok{
+  display:flex;align-items:center;gap:6px;
+  font-size:11px;font-weight:700;color:#29a85e;margin-top:4px;
+}
+/* UPLOAD PROGRESS */
+.upload-progress-wrap{
+  position:fixed;inset:0;background:rgba(0,0,0,0.55);
+  z-index:1001;display:flex;align-items:center;justify-content:center;padding:20px;
+}
+.upload-progress-box{
+  background:#fff;border-radius:18px;padding:26px 22px;
+  max-width:320px;width:100%;text-align:center;
+  box-shadow:0 20px 50px rgba(0,0,0,0.2);
+}
+.upload-progress-title{font-size:15px;font-weight:800;color:var(--text);margin-bottom:4px;}
+.upload-progress-sub{font-size:12px;color:var(--muted);margin-bottom:16px;}
+.progress-bar-wrap{background:#e8f5ee;border-radius:50px;height:10px;overflow:hidden;margin-bottom:8px;}
+.progress-bar-fill{height:100%;background:linear-gradient(90deg,var(--green),var(--green-dark));border-radius:50px;transition:width .3s ease;}
+.progress-label{font-size:11px;color:var(--muted);font-weight:600;}
+
+/* FILE SIZE WARNING */
+.file-size-warn{
+  display:flex;align-items:flex-start;gap:7px;
+  background:#fff8e6;border:1.5px solid #ffd066;
+  border-radius:9px;padding:8px 11px;margin-top:5px;
+  font-size:11px;font-weight:700;color:#7a5200;line-height:1.5;
+  animation:fadeUp .2s ease;
+}
+.file-size-warn .warn-icon{font-size:14px;flex-shrink:0;margin-top:1px;}
+.file-size-ok{
+  display:flex;align-items:center;gap:6px;
+  font-size:11px;font-weight:700;color:#29a85e;margin-top:4px;
+}
+/* UPLOAD PROGRESS */
+.upload-progress-wrap{
+  position:fixed;inset:0;background:rgba(0,0,0,0.55);
+  z-index:1001;display:flex;align-items:center;justify-content:center;padding:20px;
+}
+.upload-progress-box{
+  background:#fff;border-radius:18px;padding:26px 22px;
+  max-width:320px;width:100%;text-align:center;
+  box-shadow:0 20px 50px rgba(0,0,0,0.2);
+}
+.progress-bar-wrap{background:#e8f5ee;border-radius:50px;height:10px;overflow:hidden;margin-bottom:8px;}
+.progress-bar-fill{height:100%;background:linear-gradient(90deg,var(--green),var(--green-dark));border-radius:50px;transition:width .35s ease;}
+.progress-label{font-size:11px;color:var(--muted);font-weight:600;}
+
+/* FILE SIZE WARNING */
+.file-size-warn{display:flex;align-items:flex-start;gap:7px;background:#fff8e6;border:1.5px solid #ffd066;border-radius:9px;padding:8px 11px;margin-top:5px;font-size:11px;font-weight:700;color:#7a5200;line-height:1.5;animation:fadeUp .2s ease;}
+.file-size-warn .warn-icon{font-size:14px;flex-shrink:0;margin-top:1px;}
+.file-size-ok{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:700;color:#29a85e;margin-top:4px;}
+.upload-progress-wrap{position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:1001;display:flex;align-items:center;justify-content:center;padding:20px;}
+.upload-progress-box{background:#fff;border-radius:18px;padding:26px 22px;max-width:320px;width:100%;text-align:center;box-shadow:0 20px 50px rgba(0,0,0,0.2);}
+.progress-bar-wrap{background:#e8f5ee;border-radius:50px;height:10px;overflow:hidden;margin-bottom:8px;}
+.progress-bar-fill{height:100%;background:linear-gradient(90deg,var(--green),var(--green-dark));border-radius:50px;transition:width .35s ease;}
+.progress-label{font-size:11px;color:var(--muted);font-weight:600;}
+
 /* ===== RESPONSIVE ===== */
 @media(max-width:400px){
   .size-box input{width:40px;font-size:12px;}
@@ -307,7 +374,7 @@ footer span{color:var(--green-dark);}
     <div class="fg g2">
       <div class="f">
         <label>Nama Lengkap <span class="req">*</span></label>
-        <input type="text" id="nama" placeholder="Contoh: Clovertees"/>
+        <input type="text" id="nama" placeholder="Contoh: Andi Saputra"/>
       </div>
       <div class="f">
         <label>No. WhatsApp <span class="req">*</span></label>
@@ -345,11 +412,11 @@ footer span{color:var(--green-dark);}
   <div class="syarat">
     <h4>⚠️ Mohon Diperhatikan!</h4>
     <ul>
-      <li>Setelah data dikirim, <strong>warna dan ukuran tidak dapat diganti</strong></li>
-      <li>Desain diproses sesuai antrian — yang transfer duluan, diproses duluan</li>
-      <li>Proses pembuatan <strong>±4–7 hari kerja</strong> setelah approve desain (tergantung qty)</li>
-      <li>Toleransi ukuran <strong>±1–3 cm</strong></li>
-      <li>Kids &amp; dress: Cotton Combed 24s | Dewasa: Cotton Combed 30s</li>
+      <li><span>Setelah data dikirim, warna dan ukuran <strong>tidak dapat diganti</strong></span></li>
+      <li><span>Desain diproses sesuai antrian — yang transfer duluan, diproses duluan</span></li>
+      <li><span>Proses pembuatan ±4–7 hari kerja setelah approve desain <strong>(tergantung qty)</strong></span></li>
+      <li><span>Toleransi ukuran ±1–3 cm</span></li>
+      <li><span>Kids &amp; dress: Cotton Combed 24s &nbsp;|&nbsp; Dewasa: Cotton Combed 30s</span></li>
     </ul>
     <div class="agree-row">
       <input type="checkbox" id="agree"/>
@@ -370,7 +437,8 @@ footer span{color:var(--green-dark);}
 
 <script>
 // ── CONFIG ──────────────────────────────────────────────
-const WA_NUMBER = '6281234567890'; // ← Ganti nomor WA Clovertees
+const WA_NUMBER = '6282363560267';          // ← Ganti nomor WA Clovertees
+const GAS_URL   = 'https://script.google.com/macros/s/AKfycbwCEvPS2k1kiRaZ6UXBfsQOzTQaJUca9nMnbdDRpkrsejemm06GkBLQbh9s-7B7LHeL/exec';  // ← Paste URL Google Apps Script di sini
 
 // ── DATA ────────────────────────────────────────────────
 const COLOR_OPT = {
@@ -608,22 +676,60 @@ function pickFile(id, key, fi) {
   if(inp) inp.click();
 }
 
+const MAX_FILE_MB   = 10;                       // batas upload otomatis
+const WARN_FILE_MB  = 5;                        // mulai tampilkan peringatan ukuran
+const MAX_FILE_BYTES = MAX_FILE_MB * 1024 * 1024;
+
 function onFile(id, key, fi, input) {
   const it = find(id); if(!it) return;
-  const f = input.files[0];
-  it.desain[key].files[fi] = {name: f ? f.name : '', file: f||null};
-  // patch just this row label
-  const nameEl = document.querySelector(`#fr-${id}-${key}-${fi} .file-row-name`);
-  if(nameEl){
-    nameEl.textContent = f ? f.name : 'Belum ada file dipilih';
-    nameEl.classList.toggle('empty', !f);
+  const f  = input.files[0];
+  const rowEl  = document.getElementById(`fr-${id}-${key}-${fi}`);
+  const nameEl = rowEl?.querySelector('.file-row-name');
+
+  // Hapus warning lama di baris ini
+  rowEl?.querySelector('.file-size-warn')?.remove();
+  rowEl?.querySelector('.file-size-ok')?.remove();
+
+  if (!f) {
+    it.desain[key].files[fi] = {name:'', file:null, tooBig:false};
+    if(nameEl){ nameEl.textContent='Belum ada file dipilih'; nameEl.classList.add('empty'); }
+    return;
+  }
+
+  const fileMB   = f.size / (1024*1024);
+  const tooBig   = f.size > MAX_FILE_BYTES;
+
+  it.desain[key].files[fi] = { name: f.name, file: tooBig ? null : f, tooBig, sizeMB: fileMB.toFixed(1) };
+
+  if (nameEl) {
+    nameEl.textContent = f.name;
+    nameEl.classList.remove('empty');
+    nameEl.style.color = tooBig ? 'var(--coral)' : '';
+  }
+
+  if (tooBig) {
+    // File terlalu besar — tolak & tampilkan peringatan kirim manual
+    input.value = '';
+    it.desain[key].files[fi].file = null;
+    const warn = document.createElement('div');
+    warn.className = 'file-size-warn';
+    warn.innerHTML = `<span class="warn-icon">⚠️</span>
+      <span>File <strong>${f.name}</strong> terlalu besar (${fileMB.toFixed(1)} MB, maks ${MAX_FILE_MB} MB).<br>
+      Kirimkan file ini langsung ke admin via WhatsApp setelah order selesai.</span>`;
+    rowEl?.insertAdjacentElement('afterend', warn);
+  } else if (fileMB >= WARN_FILE_MB) {
+    // File agak besar — izinkan tapi beri info
+    const info = document.createElement('div');
+    info.className = 'file-size-ok';
+    info.innerHTML = `<span>✓</span> <span>${f.name} (${fileMB.toFixed(1)} MB) — proses upload mungkin sedikit lebih lama</span>`;
+    rowEl?.insertAdjacentElement('afterend', info);
   }
 }
 
 function addFile(id, key) {
   const it = find(id); if(!it) return;
   const fi = it.desain[key].files.length;
-  it.desain[key].files.push({name:'',file:null});
+  it.desain[key].files.push({name:'',file:null,tooBig:false});
   // append new row to DOM
   const container = document.getElementById(`frows-${id}-${key}`);
   if(!container) return;
@@ -726,45 +832,220 @@ function validate() {
   return true;
 }
 
-// ── BUILD & SEND ────────────────────────────────────────
-function buildText() {
+// ── BUILD WA TEXT ────────────────────────────────────────
+function buildText(noPesanan) {
   const nama  = document.getElementById('nama').value.trim();
   const wa    = document.getElementById('wa').value.trim();
   const ig    = document.getElementById('ig').value.trim();
   const alamat= document.getElementById('alamat').value.trim();
-  let t = `🍀 *PESANAN BARU — CLOVERTEES* 🍀\n\n`;
-  t += `👤 *Informasi Pemesan*\n• Nama: ${nama}\n• WhatsApp: ${wa}\n`;
-  if(ig) t += `• Instagram: ${ig}\n`;
-  t += `• Alamat: ${alamat}\n\n👕 *Detail Pesanan*`;
+  let t = '*PESANAN BARU - CLOVERTEES*\n';
+  t += `*No. Pesanan: ${noPesanan}*\n\n`;
+  t += `*Informasi Pemesan*\n- Nama: ${nama}\n- WhatsApp: ${wa}\n`;
+  if(ig) t += `- Instagram: ${ig}\n`;
+  t += `- Alamat: ${alamat}\n\n`;
+  t += '*Detail Pesanan*';
   items.forEach((item,idx)=>{
     const pcs=pcsOf(item);
-    const sp=[];
-    Object.entries(item.sizes.dewasa).filter(([,v])=>v>0).forEach(([k,v])=>sp.push(`Dewasa ${k}:${v}`));
-    Object.entries(item.sizes.anak).filter(([,v])=>v>0).forEach(([k,v])=>sp.push(`Anak ${k}:${v}`));
+    const spDewasa=[];
+    const spAnak=[];
+    Object.entries(item.sizes.dewasa).filter(([,v])=>v>0).forEach(([k,v])=>spDewasa.push(`${k}:${v}`));
+    Object.entries(item.sizes.anak).filter(([,v])=>v>0).forEach(([k,v])=>spAnak.push(`${k}:${v}`));
     t+=`\n\n*Item ${idx+1}: ${JENIS_LABEL[item.jenis]}*\n`;
-    t+=`• Warna: ${item.warna}\n`;
-    t+=`• Ukuran: ${sp.join(', ')||'-'}\n`;
-    t+=`• Total PCS: ${pcs}\n`;
-    SISI_LIST.forEach(({key,label})=>{
-      const d=item.desain[key];
-      const hasFile=d.files.some(f=>f.file);
-      const fileCount=d.files.filter(f=>f.file).length;
-      if(d.text||hasFile){
-        t+=`• ${label}: ${d.text||'(lihat file)'}`;
-        if(hasFile) t+=` [${fileCount} file]`;
-        t+='\n';
-      }
-    });
+    t+=`- Warna: ${item.warna}\n`;
+    if(spDewasa.length) t+=`- Ukuran Dewasa: ${spDewasa.join(', ')}\n`;
+    if(spAnak.length)   t+=`- Ukuran Anak: ${spAnak.join(', ')}\n`;
+    t+=`- Total PCS: ${pcs}\n`;
+    // Desain tidak dikirim ke WA — sudah tersimpan di Google Sheets & Drive
   });
   const tot=items.reduce((a,it)=>a+pcsOf(it),0);
-  t+=`\n📦 *Total: ${items.length} item, ${tot} pcs*\n_Order = Setuju S&K Clovertees_ ✅`;
+  t+=`\n*Total: ${items.length} item, ${tot} pcs*\n_Order = Setuju S&K Clovertees_`;
   return t;
 }
 
-function sendWA() {
+// ── FILE TO BASE64 ───────────────────────────────────────
+function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload  = () => {
+      // result: "data:image/png;base64,AAAA..." → ambil bagian setelah koma
+      const b64 = reader.result.split(',')[1];
+      resolve(b64);
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+// ── BUILD PAYLOAD FOR GAS (async — encode file ke base64) ─
+async function buildPayload() {
+  const processFiles = async (fileList) => {
+    return Promise.all(fileList.map(async (f) => {
+      if (f.file && !f.tooBig) {
+        const b64 = await fileToBase64(f.file);
+        return { name: f.name, mimeType: f.file.type || 'application/octet-stream', data: b64 };
+      }
+      // File tidak ada atau terlalu besar — kirim nama saja (tanda manual)
+      return { name: f.name || '', mimeType: '', data: '', tooBig: f.tooBig || false };
+    }));
+  };
+
+  const itemsWithFiles = await Promise.all(items.map(async item => ({
+    jenis : JENIS_LABEL[item.jenis] || item.jenis,
+    warna : item.warna,
+    sizes : { dewasa: item.sizes.dewasa, anak: item.sizes.anak },
+    desain: {
+      depan   : { text: item.desain.depan.text,    files: await processFiles(item.desain.depan.files) },
+      belakang: { text: item.desain.belakang.text, files: await processFiles(item.desain.belakang.files) },
+      lengan  : { text: item.desain.lengan.text,   files: await processFiles(item.desain.lengan.files) }
+    }
+  })));
+
+  return {
+    nama     : document.getElementById('nama').value.trim(),
+    whatsapp : document.getElementById('wa').value.trim(),
+    instagram: document.getElementById('ig').value.trim(),
+    alamat   : document.getElementById('alamat').value.trim(),
+    items    : itemsWithFiles
+  };
+}
+
+// ── SEND: simpan ke GAS → dapat nomor pesanan → buka WA ─
+async function sendWA() {
   if(!validate()) return;
-  window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(buildText())}`,'_blank');
-  toast('✅ Membuka WhatsApp...','#25d366');
+
+  if(!GAS_URL || GAS_URL === 'PASTE_GAS_URL_DISINI') {
+    toast('⚠️ GAS URL belum diset, kirim tanpa nomor pesanan','#e67e22');
+    setTimeout(()=>{ window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(buildText('SETUP-DULU'))}`,'_blank'); },1500);
+    return;
+  }
+
+  const btn = document.querySelector('.btn-wa');
+  const origHTML = btn.innerHTML;
+  btn.disabled = true;
+  btn.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="animation:spin 1s linear infinite"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg> Memproses...`;
+
+  // Hitung total file yang akan diupload untuk progress info
+  const allFiles = items.flatMap(it =>
+    ['depan','belakang','lengan'].flatMap(s => it.desain[s].files.filter(f=>f.file))
+  );
+  const hasFiles = allFiles.length > 0;
+  const totalSizeMB = allFiles.reduce((a,f)=> a + (f.file?.size||0),0) / (1024*1024);
+
+  showUploadProgress(hasFiles, totalSizeMB, allFiles.length);
+
+  try {
+    // Step 1: encode semua file ke base64
+    updateUploadProgress(20, 'Mempersiapkan file...');
+    const payload = await buildPayload();
+
+    // Step 2: kirim ke GAS
+    updateUploadProgress(50, hasFiles ? `Mengupload ${allFiles.length} file ke Google Drive...` : 'Menyimpan data ke Sheets...');
+    const res  = await fetch(GAS_URL, { method:'POST', body: JSON.stringify(payload) });
+    updateUploadProgress(90, 'Menyelesaikan...');
+    const json = await res.json();
+    if(json.result === 'success') {
+      _lastWaText = buildText(json.no_pesanan);
+      showSuccessModal(json.no_pesanan, json.total_pcs, _lastWaText);
+      setTimeout(()=>{ window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(_lastWaText)}`,'_blank'); resetForm(); }, 900);
+    } else { throw new Error(json.message || 'Gagal menyimpan'); }
+  } catch(err) {
+    toast(`❌ Gagal simpan: ${err.message}`,'#e74c3c');
+    setTimeout(()=>{ window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(buildText('CEK-ADMIN'))}`,'_blank'); },2200);
+  } finally {
+    hideUploadProgress();
+    btn.disabled = false; btn.innerHTML = origHTML;
+  }
+}
+
+// ── UPLOAD PROGRESS UI ────────────────────────────────────
+function showUploadProgress(hasFiles, totalMB, fileCount) {
+  hideUploadProgress();
+  const wrap = document.createElement('div');
+  wrap.id = 'uploadProgress';
+  wrap.className = 'upload-progress-wrap';
+  const subText = hasFiles
+    ? `Mengupload ${fileCount} file (${totalMB.toFixed(1)} MB) ke Google Drive...`
+    : 'Menyimpan data pesanan...';
+  wrap.innerHTML = `
+    <div class="upload-progress-box">
+      <div style="font-size:36px;margin-bottom:10px">${hasFiles ? '☁️' : '📋'}</div>
+      <div class="upload-progress-title">Mohon Tunggu</div>
+      <div class="upload-progress-sub">${subText}</div>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-fill" id="progressFill" style="width:10%"></div>
+      </div>
+      <div class="progress-label" id="progressLabel">Memulai...</div>
+      ${hasFiles && totalMB > 3 ? `<div style="font-size:11px;color:var(--muted);margin-top:10px;background:#f4fdf7;border-radius:8px;padding:8px">
+        Proses ini bisa memakan waktu ${Math.ceil(totalMB/1.5)}–${Math.ceil(totalMB)} detik tergantung koneksi internet kamu
+      </div>` : ''}
+    </div>`;
+  document.body.appendChild(wrap);
+}
+function updateUploadProgress(pct, label) {
+  const fill  = document.getElementById('progressFill');
+  const lbl   = document.getElementById('progressLabel');
+  if(fill) fill.style.width = pct + '%';
+  if(lbl)  lbl.textContent  = label;
+}
+function hideUploadProgress() {
+  document.getElementById('uploadProgress')?.remove();
+}
+
+// ── SUCCESS MODAL ────────────────────────────────────────
+function showSuccessModal(noPesanan, totalPcs, waText) {
+  document.getElementById('successModal')?.remove();
+  const modal = document.createElement('div');
+  modal.id = 'successModal';
+  modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.52);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;animation:mfadeIn .25s ease';
+  modal.innerHTML = `
+    <div style="background:#fff;border-radius:20px;padding:28px 22px;max-width:340px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.22)">
+      <div style="font-size:46px;margin-bottom:10px">🎉</div>
+      <h2 style="font-family:'Pacifico',cursive;color:#29a85e;font-size:21px;margin-bottom:5px">Pesanan Tercatat!</h2>
+      <p style="color:#7a9987;font-size:13px;margin-bottom:16px">Data berhasil disimpan ke Google Sheets</p>
+      <div style="background:#f4fdf7;border:2px solid #d4f5e4;border-radius:13px;padding:15px;margin-bottom:14px">
+        <div style="font-size:10px;font-weight:800;color:#7a9987;text-transform:uppercase;letter-spacing:.6px;margin-bottom:3px">Nomor Pesanan</div>
+        <div style="font-size:24px;font-weight:900;color:#1a2e23;letter-spacing:1px">${noPesanan}</div>
+        <div style="font-size:12px;color:#7a9987;margin-top:3px">Total: ${totalPcs} pcs</div>
+      </div>
+      <p style="color:#5a4400;font-size:12px;background:#fffbea;border-radius:9px;padding:9px;margin-bottom:14px">
+        WhatsApp akan terbuka otomatis. Form di-reset setelah ini.
+      </p>
+      <div style="display:flex;gap:8px">
+        <button onclick="closeAndReset()" style="background:#e8f5ee;color:#29a85e;border:2px solid #d4f5e4;border-radius:11px;padding:11px 0;font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;cursor:pointer;flex:1">Tutup</button>
+        <button onclick="reopenWA('${noPesanan}')" style="background:#25d366;color:#fff;border:none;border-radius:11px;padding:11px 0;font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;cursor:pointer;flex:1">Buka WA Lagi</button>
+      </div>
+    </div>
+    <style>@keyframes mfadeIn{from{opacity:0}to{opacity:1}}@keyframes spin{to{transform:rotate(360deg)}}</style>`;
+  document.body.appendChild(modal);
+}
+
+// Simpan waText terakhir untuk "Buka WA Lagi"
+let _lastWaText = '';
+function closeAndReset() {
+  document.getElementById('successModal')?.remove();
+}
+function reopenWA(noPesanan) {
+  window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(_lastWaText)}`,'_blank');
+}
+
+// ── RESET FORM ────────────────────────────────────────────
+function resetForm() {
+  // Reset field pemesan
+  ['nama','wa','ig','alamat'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.value = '';
+  });
+  // Reset checkbox
+  const agree = document.getElementById('agree');
+  if(agree) agree.checked = false;
+  // Reset items ke 1 item kosong
+  items = [];
+  uid   = 0;
+  items.push(mkItem());
+  render();
+  // Scroll ke atas
+  window.scrollTo({top:0, behavior:'smooth'});
+  toast('Form berhasil di-reset untuk pesanan berikutnya','#29a85e');
 }
 
 // ── UTILS ────────────────────────────────────────────────
