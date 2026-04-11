@@ -3,11 +3,23 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="color-scheme" content="light only"/>
 <title>Clovertees — Order Pakaian Kustom</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Pacifico&display=swap" rel="stylesheet"/>
 <style>
 /* ===== RESET ===== */
 *{box-sizing:border-box;margin:0;padding:0;}
+/* Force light mode — cegah browser/HP paksa dark mode */
+:root{ color-scheme: light only; }
+@media(prefers-color-scheme: dark){
+  :root{
+    --bg:#f0faf3 !important;--card:#ffffff !important;
+    --text:#111f16 !important;--muted:#5a7a62 !important;
+    --border:#b8ddc4 !important;
+  }
+  body{ background:#f0faf3 !important; color:#111f16 !important; }
+  input,textarea,select{ background:#f8fefb !important; color:#111f16 !important; }
+}
 :root{
   --green:#2aa85a;--green-dark:#1d7a40;--green-light:#c8f0d8;
   --yellow:#f5c800;--coral:#e03030;--bg:#f0faf3;--card:#ffffff;
