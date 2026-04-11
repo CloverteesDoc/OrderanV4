@@ -5,6 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
 <title>Clovertees — Order Pakaian Kustom</title>
+<script>
+// Jalankan SEBELUM CSS render — cegah flash gelap
+(function(){
+  var saved = localStorage.getItem('clv-theme');
+  if(saved === 'dark'){
+    document.documentElement.classList.add('dark');
+  } else {
+    // Default terang — hapus class dark jika ada
+    document.documentElement.classList.remove('dark');
+    localStorage.setItem('clv-theme','light');
+  }
+})();
+</script>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Pacifico&display=swap" rel="stylesheet"/>
 <style>
 /* ===== RESET ===== */
@@ -592,7 +605,12 @@ function mkItem() {
   };
 }
 
-window.onload = () => { items.push(mkItem()); render(); };
+window.onload = () => {
+  items.push(mkItem()); render();
+  // Update tampilan tombol theme sesuai kondisi saat ini
+  const isDark = document.documentElement.classList.contains('dark');
+  updateThemeBtn(isDark);
+};
 
 // ── ADD / REMOVE ITEM ───────────────────────────────────
 function addItem() {
@@ -1204,15 +1222,19 @@ function updateThemeBtn(isDark) {
   document.getElementById('themeIcon').textContent  = isDark ? '🌙' : '☀️';
   document.getElementById('themeLabel').textContent = isDark ? 'Mode Gelap' : 'Mode Terang';
 }
-// Ingat pilihan theme saat reload
+// Theme: default SELALU TERANG
+// Jika belum pernah pilih → hapus class dark, set light
 (function(){
   const saved = localStorage.getItem('clv-theme');
-  // Default: ikuti sistem HP
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const useDark = saved ? saved === 'dark' : prefersDark;
-  if(useDark) document.documentElement.classList.add('dark');
-  // Update button setelah DOM siap
-  window.addEventListener('DOMContentLoaded', () => updateThemeBtn(useDark));
+  if(!saved) {
+    // Pertama kali buka → paksa terang, hapus dark jika ada
+    document.documentElement.classList.remove('dark');
+    localStorage.setItem('clv-theme','light');
+  } else if(saved === 'dark') {
+    document.documentElement.classList.add('dark');
+  } else {
+    document.documentElement.classList.remove('dark');
+  }
 })();
 
 // ── UTILS ────────────────────────────────────────────────
