@@ -340,6 +340,51 @@ input::placeholder,textarea::placeholder{color:#a0bca8;font-weight:600;}
 footer{text-align:center;color:var(--muted);font-size:14px;font-weight:700;padding:4px 16px 30px;}
 footer span{color:var(--green-dark);}
 
+/* ===== JENIS DROPDOWN CUSTOM ===== */
+.jenis-trigger{
+  display:flex;align-items:center;gap:12px;
+  border:2.5px solid var(--border);border-radius:11px;
+  padding:13px 16px;background:#f8fefb;
+  cursor:pointer;font-size:var(--fs-input);font-weight:700;
+  transition:border-color .18s,box-shadow .18s;user-select:none;
+  min-height:58px;
+}
+.jenis-trigger:hover,.jenis-trigger.open{
+  border-color:var(--green);box-shadow:0 0 0 4px rgba(42,168,90,0.15);
+}
+.jenis-trigger-icon{font-size:24px;flex-shrink:0;width:32px;text-align:center;}
+.jenis-trigger-text{flex:1;min-width:0;}
+.jenis-trigger-name{font-size:16px;font-weight:800;color:var(--text);line-height:1.2;}
+.jenis-trigger-desc{font-size:12px;font-weight:600;color:var(--muted);margin-top:2px;}
+.jenis-trigger-arrow{font-size:12px;color:var(--muted);flex-shrink:0;transition:transform .2s;}
+.jenis-trigger.open .jenis-trigger-arrow{transform:rotate(180deg);}
+
+.jenis-dropdown{
+  display:none;
+  flex-direction:column;gap:0;
+  background:#fff;border:2.5px solid var(--border);
+  border-radius:13px;margin-top:6px;overflow:hidden;
+}
+.jenis-dropdown.open{display:flex;}
+.jenis-option{
+  display:flex;align-items:center;gap:14px;
+  padding:15px 18px;cursor:pointer;
+  border-bottom:1.5px solid #e8f5ee;
+  transition:background .15s;
+}
+.jenis-option:last-child{border-bottom:none;}
+.jenis-option:hover{background:#edf9f1;}
+.jenis-option.active{background:var(--green-light);}
+.jenis-option-icon{font-size:26px;flex-shrink:0;width:34px;text-align:center;}
+.jenis-option-info{flex:1;}
+.jenis-option-name{font-size:16px;font-weight:800;color:var(--text);}
+.jenis-option-desc{font-size:12px;font-weight:600;color:var(--muted);margin-top:2px;}
+.jenis-option-check{
+  font-size:18px;color:var(--green);flex-shrink:0;
+  opacity:0;transition:opacity .15s;
+}
+.jenis-option.active .jenis-option-check{opacity:1;}
+
 @media(max-width:420px){
   .size-box input{width:50px;font-size:15px;}
   .color-grid{grid-template-columns:repeat(auto-fill,minmax(58px,1fr));}
@@ -431,8 +476,8 @@ footer span{color:var(--green-dark);}
 
 <script>
 // ── CONFIG ──────────────────────────────────────────────
-const WA_NUMBER = '6282363560267';          // ← Ganti nomor WA Clovertees
-const GAS_URL   = 'https://script.google.com/macros/s/AKfycbwCEvPS2k1kiRaZ6UXBfsQOzTQaJUca9nMnbdDRpkrsejemm06GkBLQbh9s-7B7LHeL/exec';  // ← Paste URL Google Apps Script di sini
+const WA_NUMBER = '6282363560267';
+const GAS_URL   = 'https://script.google.com/macros/s/AKfycbwCEvPS2k1kiRaZ6UXBfsQOzTQaJUca9nMnbdDRpkrsejemm06GkBLQbh9s-7B7LHeL/exec';
 
 // ── DATA ────────────────────────────────────────────────
 const COLOR_OPT = {
@@ -452,6 +497,11 @@ const SIZE_OPT = {
   kaos_panjang:{dewasa:["XS","S","M","L","XL","2XL","3XL"], anak:["XS","S","M","L","XL"]}
 };
 const JENIS_LABEL = {kaos:"Kaos (T-Shirt)", dress:"Dress", kaos_panjang:"Kaos Lengan Panjang"};
+const JENIS_INFO  = {
+  kaos:        { icon:"👕", desc:"Bahan Combed 30s" },
+  dress:       { icon:"👗", desc:"Bahan Combed 24s" },
+  kaos_panjang:{ icon:"🧥", desc:"Bahan Combed 30s" }
+};
 const SISI_LIST   = [{key:"depan",icon:"👕",label:"Desain Depan"},{key:"belakang",icon:"🔄",label:"Desain Belakang"},{key:"lengan",icon:"💪",label:"Desain Lengan"}];
 
 // ── STATE ────────────────────────────────────────────────
@@ -511,10 +561,25 @@ function render() {
        <!-- JENIS -->
        <div class="item-section">
          <div class="item-section-label">Jenis Pakaian <span class="req">*</span></div>
-         <select onchange="onJenis(${item.id},this.value)">
-           <option value="">-- Pilih Jenis --</option>
-           ${Object.entries(JENIS_LABEL).map(([k,v])=>`<option value="${k}"${item.jenis===k?' selected':''}>${v}</option>`).join('')}
-         </select>
+         <div class="jenis-trigger${item._jenisOpen?' open':''}" onclick="toggleJenis(${item.id})">
+           <span class="jenis-trigger-icon">${item.jenis ? JENIS_INFO[item.jenis].icon : '👕'}</span>
+           <div class="jenis-trigger-text">
+             <div class="jenis-trigger-name">${item.jenis ? JENIS_LABEL[item.jenis] : 'Pilih jenis pakaian...'}</div>
+             ${item.jenis ? `<div class="jenis-trigger-desc">${JENIS_INFO[item.jenis].desc}</div>` : ''}
+           </div>
+           <span class="jenis-trigger-arrow">▼</span>
+         </div>
+         <div class="jenis-dropdown${item._jenisOpen?' open':''}" id="jdrop-${item.id}">
+           ${Object.entries(JENIS_LABEL).map(([k,v])=>`
+             <div class="jenis-option${item.jenis===k?' active':''}" onclick="onJenis(${item.id},'${k}')">
+               <span class="jenis-option-icon">${JENIS_INFO[k].icon}</span>
+               <div class="jenis-option-info">
+                 <div class="jenis-option-name">${v}</div>
+                 <div class="jenis-option-desc">${JENIS_INFO[k].desc}</div>
+               </div>
+               <span class="jenis-option-check">✓</span>
+             </div>`).join('')}
+         </div>
        </div>
 
        <!-- WARNA -->
@@ -617,9 +682,18 @@ function renderDesain(item, {key, icon, label}) {
 // ── EVENT HANDLERS ──────────────────────────────────────
 function onJenis(id, val) {
   const it = find(id); if(!it) return;
-  it.jenis = val; it.warna = ''; it._open = false;
+  it.jenis = val; it.warna = ''; it._open = false; it._jenisOpen = false;
   it.sizes = {dewasa:{},anak:{}};
   render();
+}
+
+function toggleJenis(id) {
+  const it = find(id); if(!it) return;
+  it._jenisOpen = !it._jenisOpen;
+  const trigger = document.querySelector(`#item-${id} .jenis-trigger`);
+  const drop    = document.getElementById(`jdrop-${id}`);
+  if(trigger) trigger.classList.toggle('open', it._jenisOpen);
+  if(drop)    drop.classList.toggle('open', it._jenisOpen);
 }
 
 function togglePalette(id) {
@@ -908,43 +982,52 @@ async function sendWA() {
   if(!validate()) return;
 
   if(!GAS_URL || GAS_URL === 'PASTE_GAS_URL_DISINI') {
-    toast('⚠️ GAS URL belum diset, kirim tanpa nomor pesanan','#e67e22');
-    setTimeout(()=>{ window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(buildText('SETUP-DULU'))}`,'_blank'); },1500);
+    toast('⚠️ GAS URL belum diset','#e67e22');
+    window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(buildText('SETUP-DULU'))}`,'_blank');
     return;
   }
+
+  const tempText = buildText('MEMPROSES...');
+  const waWindow = window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(tempText)}`,'_blank');
 
   const btn = document.querySelector('.btn-wa');
   const origHTML = btn.innerHTML;
   btn.disabled = true;
   btn.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="animation:spin 1s linear infinite"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg> Memproses...`;
 
-  // Hitung total file yang akan diupload untuk progress info
   const allFiles = items.flatMap(it =>
     ['depan','belakang','lengan'].flatMap(s => it.desain[s].files.filter(f=>f.file))
   );
-  const hasFiles = allFiles.length > 0;
+  const hasFiles   = allFiles.length > 0;
   const totalSizeMB = allFiles.reduce((a,f)=> a + (f.file?.size||0),0) / (1024*1024);
 
   showUploadProgress(hasFiles, totalSizeMB, allFiles.length);
 
   try {
-    // Step 1: encode semua file ke base64
     updateUploadProgress(20, 'Mempersiapkan file...');
     const payload = await buildPayload();
 
-    // Step 2: kirim ke GAS
     updateUploadProgress(50, hasFiles ? `Mengupload ${allFiles.length} file ke Google Drive...` : 'Menyimpan data ke Sheets...');
     const res  = await fetch(GAS_URL, { method:'POST', body: JSON.stringify(payload) });
     updateUploadProgress(90, 'Menyelesaikan...');
     const json = await res.json();
+
     if(json.result === 'success') {
       _lastWaText = buildText(json.no_pesanan);
-      showSuccessModal(json.no_pesanan, json.total_pcs, _lastWaText);
-      setTimeout(()=>{ window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(_lastWaText)}`,'_blank'); resetForm(); }, 900);
+      if(waWindow && !waWindow.closed) {
+        waWindow.location.href = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(_lastWaText)}`;
+      } else {
+        window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(_lastWaText)}`,'_blank');
+      }
+      showSuccessModal(json.no_pesanan, json.total_pcs);
+      resetForm();
     } else { throw new Error(json.message || 'Gagal menyimpan'); }
+
   } catch(err) {
     toast(`❌ Gagal simpan: ${err.message}`,'#e74c3c');
-    setTimeout(()=>{ window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(buildText('CEK-ADMIN'))}`,'_blank'); },2200);
+    if(waWindow && !waWindow.closed) {
+      waWindow.location.href = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(buildText('CEK-ADMIN'))}`;
+    }
   } finally {
     hideUploadProgress();
     btn.disabled = false; btn.innerHTML = origHTML;
