@@ -3,91 +3,17 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
 <title>Clovertees — Order Pakaian Kustom</title>
-<script>
-// Jalankan SEBELUM CSS render — cegah flash gelap
-(function(){
-  var saved = localStorage.getItem('clv-theme');
-  if(saved === 'dark'){
-    document.documentElement.classList.add('dark');
-  } else {
-    // Default terang — hapus class dark jika ada
-    document.documentElement.classList.remove('dark');
-    localStorage.setItem('clv-theme','light');
-  }
-})();
-</script>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Pacifico&display=swap" rel="stylesheet"/>
 <style>
 /* ===== RESET ===== */
 *{box-sizing:border-box;margin:0;padding:0;}
-
 :root{
   --green:#2aa85a;--green-dark:#1d7a40;--green-light:#c8f0d8;
   --yellow:#f5c800;--coral:#e03030;--bg:#f0faf3;--card:#ffffff;
   --text:#111f16;--muted:#5a7a62;--border:#b8ddc4;
   --radius:16px;--shadow:0 3px 18px rgba(42,168,90,0.11);
   --fs-base:17px;--fs-label:15px;--fs-input:17px;--fs-btn:19px;
-}
-/* ===== DARK MODE ===== */
-html.dark{
-  --bg:#0f1a12;--card:#1a2b1e;--text:#e8f5ec;--muted:#7aab86;
-  --border:#2a4a30;--green-light:#1a3a22;--shadow:0 3px 18px rgba(0,0,0,0.3);
-}
-html.dark body{background:var(--bg);color:var(--text);}
-html.dark .card{background:var(--card);border-color:rgba(42,168,90,0.2);}
-html.dark input[type="text"],html.dark input[type="tel"],
-html.dark input[type="email"],html.dark textarea,html.dark select{
-  background:#142018;color:var(--text);border-color:var(--border);
-}
-html.dark input::placeholder,html.dark textarea::placeholder{color:#4a6b52;}
-html.dark .item-card{background:#142018;border-color:#2a4a30;}
-html.dark .color-grid,html.dark .jenis-dropdown{background:#1a2b1e;border-color:#2a4a30;}
-html.dark .jenis-trigger,html.dark .color-trigger{background:#142018;border-color:#2a4a30;}
-html.dark .jenis-option{border-color:#2a4a30;}
-html.dark .jenis-option:hover{background:#1e3824;}
-html.dark .jenis-option.active{background:#1a3a22;}
-html.dark .color-chip:hover{background:#1e3824;border-color:#3a6a44;}
-html.dark .color-chip.active{background:#1a3a22;border-color:var(--green);}
-html.dark .desain-block{background:#1a2b1e;border-color:#2a4a30;}
-html.dark .desain-block-head{background:#142018;border-color:#2a4a30;}
-html.dark .desain-block-body textarea{background:#0f1a12;color:var(--text);}
-html.dark .file-row{background:#142018;border-color:#2a4a30;}
-html.dark .syarat{background:#1a2000;border-color:#4a5a00;}
-html.dark .syarat h4{color:#d4b800;}
-html.dark .syarat li{color:#c8a800;}
-html.dark .agree-row label{color:#c8a800;}
-html.dark .agree-row{border-color:#4a5a00;}
-html.dark .summary-card{background:linear-gradient(135deg,#0a1a0e 0%,#0f2418 100%);}
-html.dark .logo-badge{background:#1a2b1e;color:#7adb8a;}
-html.dark footer{color:#4a6b52;}
-html.dark .size-group-label{background:#1a3a22;color:#7adb8a;}
-html.dark .desain-block-body textarea::placeholder{color:#4a6b52;}
-html.dark .file-row-name.empty{color:#4a6b52;}
-html.dark .card-title{border-color:#2a4a30;}
-
-/* ===== TOMBOL SWITCH ===== */
-.theme-switch-wrap{
-  position:fixed;bottom:24px;right:16px;z-index:998;
-}
-.theme-switch-btn{
-  display:flex;align-items:center;gap:8px;
-  background:var(--card);border:2.5px solid var(--border);
-  border-radius:50px;padding:10px 16px;
-  box-shadow:0 4px 20px rgba(0,0,0,0.15);
-  cursor:pointer;font-family:'Nunito',sans-serif;
-  font-size:14px;font-weight:800;color:var(--text);
-  transition:all .25s;user-select:none;
-}
-.theme-switch-btn:hover{
-  border-color:var(--green);
-  box-shadow:0 4px 24px rgba(42,168,90,0.25);
-  transform:translateY(-1px);
-}
-.theme-switch-icon{font-size:18px;line-height:1;}
-html.dark .theme-switch-btn{
-  background:#1a2b1e;border-color:#2a4a30;color:#e8f5ec;
 }
 html{scroll-behavior:smooth;}
 body{
@@ -414,51 +340,6 @@ input::placeholder,textarea::placeholder{color:#a0bca8;font-weight:600;}
 footer{text-align:center;color:var(--muted);font-size:14px;font-weight:700;padding:4px 16px 30px;}
 footer span{color:var(--green-dark);}
 
-/* ===== JENIS DROPDOWN CUSTOM ===== */
-.jenis-trigger{
-  display:flex;align-items:center;gap:12px;
-  border:2.5px solid var(--border);border-radius:11px;
-  padding:13px 16px;background:#f8fefb;
-  cursor:pointer;font-size:var(--fs-input);font-weight:700;
-  transition:border-color .18s,box-shadow .18s;user-select:none;
-  min-height:58px;
-}
-.jenis-trigger:hover,.jenis-trigger.open{
-  border-color:var(--green);box-shadow:0 0 0 4px rgba(42,168,90,0.15);
-}
-.jenis-trigger-icon{font-size:24px;flex-shrink:0;width:32px;text-align:center;}
-.jenis-trigger-text{flex:1;min-width:0;}
-.jenis-trigger-name{font-size:16px;font-weight:800;color:var(--text);line-height:1.2;}
-.jenis-trigger-desc{font-size:12px;font-weight:600;color:var(--muted);margin-top:2px;}
-.jenis-trigger-arrow{font-size:12px;color:var(--muted);flex-shrink:0;transition:transform .2s;}
-.jenis-trigger.open .jenis-trigger-arrow{transform:rotate(180deg);}
-
-.jenis-dropdown{
-  display:none;
-  flex-direction:column;gap:0;
-  background:#fff;border:2.5px solid var(--border);
-  border-radius:13px;margin-top:6px;overflow:hidden;
-}
-.jenis-dropdown.open{display:flex;}
-.jenis-option{
-  display:flex;align-items:center;gap:14px;
-  padding:15px 18px;cursor:pointer;
-  border-bottom:1.5px solid #e8f5ee;
-  transition:background .15s;
-}
-.jenis-option:last-child{border-bottom:none;}
-.jenis-option:hover{background:#edf9f1;}
-.jenis-option.active{background:var(--green-light);}
-.jenis-option-icon{font-size:26px;flex-shrink:0;width:34px;text-align:center;}
-.jenis-option-info{flex:1;}
-.jenis-option-name{font-size:16px;font-weight:800;color:var(--text);}
-.jenis-option-desc{font-size:12px;font-weight:600;color:var(--muted);margin-top:2px;}
-.jenis-option-check{
-  font-size:18px;color:var(--green);flex-shrink:0;
-  opacity:0;transition:opacity .15s;
-}
-.jenis-option.active .jenis-option-check{opacity:1;}
-
 @media(max-width:420px){
   .size-box input{width:50px;font-size:15px;}
   .color-grid{grid-template-columns:repeat(auto-fill,minmax(58px,1fr));}
@@ -548,18 +429,10 @@ footer span{color:var(--green-dark);}
 <footer>Dibuat dengan ❤️ oleh <span>Clovertees</span> — Thankyou for trusting us!</footer>
 <div id="toast"></div>
 
-<!-- TOMBOL SWITCH DARK/LIGHT -->
-<div class="theme-switch-wrap">
-  <div class="theme-switch-btn" onclick="toggleTheme()" id="themeBtn">
-    <span class="theme-switch-icon" id="themeIcon">☀️</span>
-    <span id="themeLabel">Mode Terang</span>
-  </div>
-</div>
-
 <script>
 // ── CONFIG ──────────────────────────────────────────────
-const WA_NUMBER = '6282363560267';
-const GAS_URL   = 'https://script.google.com/macros/s/AKfycbwCEvPS2k1kiRaZ6UXBfsQOzTQaJUca9nMnbdDRpkrsejemm06GkBLQbh9s-7B7LHeL/exec';
+const WA_NUMBER = '6282363560267';          // ← Ganti nomor WA Clovertees
+const GAS_URL   = 'https://script.google.com/macros/s/AKfycbwCEvPS2k1kiRaZ6UXBfsQOzTQaJUca9nMnbdDRpkrsejemm06GkBLQbh9s-7B7LHeL/exec';  // ← Paste URL Google Apps Script di sini
 
 // ── DATA ────────────────────────────────────────────────
 const COLOR_OPT = {
@@ -579,11 +452,6 @@ const SIZE_OPT = {
   kaos_panjang:{dewasa:["XS","S","M","L","XL","2XL","3XL"], anak:["XS","S","M","L","XL"]}
 };
 const JENIS_LABEL = {kaos:"Kaos (T-Shirt)", dress:"Dress", kaos_panjang:"Kaos Lengan Panjang"};
-const JENIS_INFO  = {
-  kaos:        { icon:"👕", desc:"Bahan Combed 30s" },
-  dress:       { icon:"👗", desc:"Bahan Combed 24s" },
-  kaos_panjang:{ icon:"🧥", desc:"Bahan Combed 30s" }
-};
 const SISI_LIST   = [{key:"depan",icon:"👕",label:"Desain Depan"},{key:"belakang",icon:"🔄",label:"Desain Belakang"},{key:"lengan",icon:"💪",label:"Desain Lengan"}];
 
 // ── STATE ────────────────────────────────────────────────
@@ -605,12 +473,7 @@ function mkItem() {
   };
 }
 
-window.onload = () => {
-  items.push(mkItem()); render();
-  // Update tampilan tombol theme sesuai kondisi saat ini
-  const isDark = document.documentElement.classList.contains('dark');
-  updateThemeBtn(isDark);
-};
+window.onload = () => { items.push(mkItem()); render(); };
 
 // ── ADD / REMOVE ITEM ───────────────────────────────────
 function addItem() {
@@ -648,25 +511,10 @@ function render() {
        <!-- JENIS -->
        <div class="item-section">
          <div class="item-section-label">Jenis Pakaian <span class="req">*</span></div>
-         <div class="jenis-trigger${item._jenisOpen?' open':''}" onclick="toggleJenis(${item.id})">
-           <span class="jenis-trigger-icon">${item.jenis ? JENIS_INFO[item.jenis].icon : '👕'}</span>
-           <div class="jenis-trigger-text">
-             <div class="jenis-trigger-name">${item.jenis ? JENIS_LABEL[item.jenis] : 'Pilih jenis pakaian...'}</div>
-             ${item.jenis ? `<div class="jenis-trigger-desc">${JENIS_INFO[item.jenis].desc}</div>` : ''}
-           </div>
-           <span class="jenis-trigger-arrow">▼</span>
-         </div>
-         <div class="jenis-dropdown${item._jenisOpen?' open':''}" id="jdrop-${item.id}">
-           ${Object.entries(JENIS_LABEL).map(([k,v])=>`
-             <div class="jenis-option${item.jenis===k?' active':''}" onclick="onJenis(${item.id},'${k}')">
-               <span class="jenis-option-icon">${JENIS_INFO[k].icon}</span>
-               <div class="jenis-option-info">
-                 <div class="jenis-option-name">${v}</div>
-                 <div class="jenis-option-desc">${JENIS_INFO[k].desc}</div>
-               </div>
-               <span class="jenis-option-check">✓</span>
-             </div>`).join('')}
-         </div>
+         <select onchange="onJenis(${item.id},this.value)">
+           <option value="">-- Pilih Jenis --</option>
+           ${Object.entries(JENIS_LABEL).map(([k,v])=>`<option value="${k}"${item.jenis===k?' selected':''}>${v}</option>`).join('')}
+         </select>
        </div>
 
        <!-- WARNA -->
@@ -769,18 +617,9 @@ function renderDesain(item, {key, icon, label}) {
 // ── EVENT HANDLERS ──────────────────────────────────────
 function onJenis(id, val) {
   const it = find(id); if(!it) return;
-  it.jenis = val; it.warna = ''; it._open = false; it._jenisOpen = false;
+  it.jenis = val; it.warna = ''; it._open = false;
   it.sizes = {dewasa:{},anak:{}};
   render();
-}
-
-function toggleJenis(id) {
-  const it = find(id); if(!it) return;
-  it._jenisOpen = !it._jenisOpen;
-  const trigger = document.querySelector(`#item-${id} .jenis-trigger`);
-  const drop    = document.getElementById(`jdrop-${id}`);
-  if(trigger) trigger.classList.toggle('open', it._jenisOpen);
-  if(drop)    drop.classList.toggle('open', it._jenisOpen);
 }
 
 function togglePalette(id) {
@@ -1069,52 +908,43 @@ async function sendWA() {
   if(!validate()) return;
 
   if(!GAS_URL || GAS_URL === 'PASTE_GAS_URL_DISINI') {
-    toast('⚠️ GAS URL belum diset','#e67e22');
-    window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(buildText('SETUP-DULU'))}`,'_blank');
+    toast('⚠️ GAS URL belum diset, kirim tanpa nomor pesanan','#e67e22');
+    setTimeout(()=>{ window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(buildText('SETUP-DULU'))}`,'_blank'); },1500);
     return;
   }
-
-  const tempText = buildText('MEMPROSES...');
-  const waWindow = window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(tempText)}`,'_blank');
 
   const btn = document.querySelector('.btn-wa');
   const origHTML = btn.innerHTML;
   btn.disabled = true;
   btn.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="animation:spin 1s linear infinite"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg> Memproses...`;
 
+  // Hitung total file yang akan diupload untuk progress info
   const allFiles = items.flatMap(it =>
     ['depan','belakang','lengan'].flatMap(s => it.desain[s].files.filter(f=>f.file))
   );
-  const hasFiles   = allFiles.length > 0;
+  const hasFiles = allFiles.length > 0;
   const totalSizeMB = allFiles.reduce((a,f)=> a + (f.file?.size||0),0) / (1024*1024);
 
   showUploadProgress(hasFiles, totalSizeMB, allFiles.length);
 
   try {
+    // Step 1: encode semua file ke base64
     updateUploadProgress(20, 'Mempersiapkan file...');
     const payload = await buildPayload();
 
+    // Step 2: kirim ke GAS
     updateUploadProgress(50, hasFiles ? `Mengupload ${allFiles.length} file ke Google Drive...` : 'Menyimpan data ke Sheets...');
     const res  = await fetch(GAS_URL, { method:'POST', body: JSON.stringify(payload) });
     updateUploadProgress(90, 'Menyelesaikan...');
     const json = await res.json();
-
     if(json.result === 'success') {
       _lastWaText = buildText(json.no_pesanan);
-      if(waWindow && !waWindow.closed) {
-        waWindow.location.href = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(_lastWaText)}`;
-      } else {
-        window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(_lastWaText)}`,'_blank');
-      }
-      showSuccessModal(json.no_pesanan, json.total_pcs);
-      resetForm();
+      showSuccessModal(json.no_pesanan, json.total_pcs, _lastWaText);
+      setTimeout(()=>{ window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(_lastWaText)}`,'_blank'); resetForm(); }, 900);
     } else { throw new Error(json.message || 'Gagal menyimpan'); }
-
   } catch(err) {
     toast(`❌ Gagal simpan: ${err.message}`,'#e74c3c');
-    if(waWindow && !waWindow.closed) {
-      waWindow.location.href = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(buildText('CEK-ADMIN'))}`;
-    }
+    setTimeout(()=>{ window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(buildText('CEK-ADMIN'))}`,'_blank'); },2200);
   } finally {
     hideUploadProgress();
     btn.disabled = false; btn.innerHTML = origHTML;
@@ -1211,31 +1041,6 @@ function resetForm() {
   window.scrollTo({top:0, behavior:'smooth'});
   toast('Form berhasil di-reset untuk pesanan berikutnya','#29a85e');
 }
-
-// ── THEME SWITCH ─────────────────────────────────────────
-function toggleTheme() {
-  const isDark = document.documentElement.classList.toggle('dark');
-  localStorage.setItem('clv-theme', isDark ? 'dark' : 'light');
-  updateThemeBtn(isDark);
-}
-function updateThemeBtn(isDark) {
-  document.getElementById('themeIcon').textContent  = isDark ? '🌙' : '☀️';
-  document.getElementById('themeLabel').textContent = isDark ? 'Mode Gelap' : 'Mode Terang';
-}
-// Theme: default SELALU TERANG
-// Jika belum pernah pilih → hapus class dark, set light
-(function(){
-  const saved = localStorage.getItem('clv-theme');
-  if(!saved) {
-    // Pertama kali buka → paksa terang, hapus dark jika ada
-    document.documentElement.classList.remove('dark');
-    localStorage.setItem('clv-theme','light');
-  } else if(saved === 'dark') {
-    document.documentElement.classList.add('dark');
-  } else {
-    document.documentElement.classList.remove('dark');
-  }
-})();
 
 // ── UTILS ────────────────────────────────────────────────
 function find(id){ return items.find(i=>i.id===id); }
