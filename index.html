@@ -3,29 +3,78 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<meta name="color-scheme" content="light only"/>
+
 <title>Clovertees — Order Pakaian Kustom</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Pacifico&display=swap" rel="stylesheet"/>
 <style>
 /* ===== RESET ===== */
 *{box-sizing:border-box;margin:0;padding:0;}
-/* Force light mode — cegah browser/HP paksa dark mode */
-:root{ color-scheme: light only; }
-@media(prefers-color-scheme: dark){
-  :root{
-    --bg:#f0faf3 !important;--card:#ffffff !important;
-    --text:#111f16 !important;--muted:#5a7a62 !important;
-    --border:#b8ddc4 !important;
-  }
-  body{ background:#f0faf3 !important; color:#111f16 !important; }
-  input,textarea,select{ background:#f8fefb !important; color:#111f16 !important; }
-}
+
 :root{
   --green:#2aa85a;--green-dark:#1d7a40;--green-light:#c8f0d8;
   --yellow:#f5c800;--coral:#e03030;--bg:#f0faf3;--card:#ffffff;
   --text:#111f16;--muted:#5a7a62;--border:#b8ddc4;
   --radius:16px;--shadow:0 3px 18px rgba(42,168,90,0.11);
   --fs-base:17px;--fs-label:15px;--fs-input:17px;--fs-btn:19px;
+}
+/* ===== DARK MODE ===== */
+html.dark{
+  --bg:#0f1a12;--card:#1a2b1e;--text:#e8f5ec;--muted:#7aab86;
+  --border:#2a4a30;--green-light:#1a3a22;--shadow:0 3px 18px rgba(0,0,0,0.3);
+}
+html.dark body{background:var(--bg);color:var(--text);}
+html.dark .card{background:var(--card);border-color:rgba(42,168,90,0.2);}
+html.dark input[type="text"],html.dark input[type="tel"],
+html.dark input[type="email"],html.dark textarea,html.dark select{
+  background:#142018;color:var(--text);border-color:var(--border);
+}
+html.dark input::placeholder,html.dark textarea::placeholder{color:#4a6b52;}
+html.dark .item-card{background:#142018;border-color:#2a4a30;}
+html.dark .color-grid,html.dark .jenis-dropdown{background:#1a2b1e;border-color:#2a4a30;}
+html.dark .jenis-trigger,html.dark .color-trigger{background:#142018;border-color:#2a4a30;}
+html.dark .jenis-option{border-color:#2a4a30;}
+html.dark .jenis-option:hover{background:#1e3824;}
+html.dark .jenis-option.active{background:#1a3a22;}
+html.dark .color-chip:hover{background:#1e3824;border-color:#3a6a44;}
+html.dark .color-chip.active{background:#1a3a22;border-color:var(--green);}
+html.dark .desain-block{background:#1a2b1e;border-color:#2a4a30;}
+html.dark .desain-block-head{background:#142018;border-color:#2a4a30;}
+html.dark .desain-block-body textarea{background:#0f1a12;color:var(--text);}
+html.dark .file-row{background:#142018;border-color:#2a4a30;}
+html.dark .syarat{background:#1a2000;border-color:#4a5a00;}
+html.dark .syarat h4{color:#d4b800;}
+html.dark .syarat li{color:#c8a800;}
+html.dark .agree-row label{color:#c8a800;}
+html.dark .agree-row{border-color:#4a5a00;}
+html.dark .summary-card{background:linear-gradient(135deg,#0a1a0e 0%,#0f2418 100%);}
+html.dark .logo-badge{background:#1a2b1e;color:#7adb8a;}
+html.dark footer{color:#4a6b52;}
+html.dark .size-group-label{background:#1a3a22;color:#7adb8a;}
+html.dark .desain-block-body textarea::placeholder{color:#4a6b52;}
+html.dark .file-row-name.empty{color:#4a6b52;}
+html.dark .card-title{border-color:#2a4a30;}
+
+/* ===== TOMBOL SWITCH ===== */
+.theme-switch-wrap{
+  position:fixed;bottom:24px;right:16px;z-index:998;
+}
+.theme-switch-btn{
+  display:flex;align-items:center;gap:8px;
+  background:var(--card);border:2.5px solid var(--border);
+  border-radius:50px;padding:10px 16px;
+  box-shadow:0 4px 20px rgba(0,0,0,0.15);
+  cursor:pointer;font-family:'Nunito',sans-serif;
+  font-size:14px;font-weight:800;color:var(--text);
+  transition:all .25s;user-select:none;
+}
+.theme-switch-btn:hover{
+  border-color:var(--green);
+  box-shadow:0 4px 24px rgba(42,168,90,0.25);
+  transform:translateY(-1px);
+}
+.theme-switch-icon{font-size:18px;line-height:1;}
+html.dark .theme-switch-btn{
+  background:#1a2b1e;border-color:#2a4a30;color:#e8f5ec;
 }
 html{scroll-behavior:smooth;}
 body{
@@ -485,6 +534,14 @@ footer span{color:var(--green-dark);}
 
 <footer>Dibuat dengan ❤️ oleh <span>Clovertees</span> — Thankyou for trusting us!</footer>
 <div id="toast"></div>
+
+<!-- TOMBOL SWITCH DARK/LIGHT -->
+<div class="theme-switch-wrap">
+  <div class="theme-switch-btn" onclick="toggleTheme()" id="themeBtn">
+    <span class="theme-switch-icon" id="themeIcon">☀️</span>
+    <span id="themeLabel">Mode Terang</span>
+  </div>
+</div>
 
 <script>
 // ── CONFIG ──────────────────────────────────────────────
@@ -1136,6 +1193,27 @@ function resetForm() {
   window.scrollTo({top:0, behavior:'smooth'});
   toast('Form berhasil di-reset untuk pesanan berikutnya','#29a85e');
 }
+
+// ── THEME SWITCH ─────────────────────────────────────────
+function toggleTheme() {
+  const isDark = document.documentElement.classList.toggle('dark');
+  localStorage.setItem('clv-theme', isDark ? 'dark' : 'light');
+  updateThemeBtn(isDark);
+}
+function updateThemeBtn(isDark) {
+  document.getElementById('themeIcon').textContent  = isDark ? '🌙' : '☀️';
+  document.getElementById('themeLabel').textContent = isDark ? 'Mode Gelap' : 'Mode Terang';
+}
+// Ingat pilihan theme saat reload
+(function(){
+  const saved = localStorage.getItem('clv-theme');
+  // Default: ikuti sistem HP
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const useDark = saved ? saved === 'dark' : prefersDark;
+  if(useDark) document.documentElement.classList.add('dark');
+  // Update button setelah DOM siap
+  window.addEventListener('DOMContentLoaded', () => updateThemeBtn(useDark));
+})();
 
 // ── UTILS ────────────────────────────────────────────────
 function find(id){ return items.find(i=>i.id===id); }
