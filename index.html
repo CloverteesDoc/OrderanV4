@@ -1,0 +1,1767 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clovertees — Order Pakaian Kustom</title>
+  <!-- Favicon Clover -->
+  <link rel="icon" type="image/png" href="logo.png">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Pacifico&display=swap"
+    rel="stylesheet" />
+  <style>
+    /* ===== RESET ===== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --green: #2aa85a;
+      --green-dark: #1d7a40;
+      --green-light: #c8f0d8;
+      --yellow: #f5c800;
+      --coral: #e03030;
+      --bg: #f0faf3;
+      --card: #ffffff;
+      --text: #111f16;
+      --muted: #5a7a62;
+      --border: #b8ddc4;
+      --radius: 16px;
+      --shadow: 0 3px 18px rgba(42, 168, 90, 0.11);
+      --fs-base: 17px;
+      --fs-label: 15px;
+      --fs-input: 17px;
+      --fs-btn: 19px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      font-size: var(--fs-base);
+      line-height: 1.6;
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      background: var(--green);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header-inner {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 34px 22px 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .logo-badge {
+      background: #fff;
+      border-radius: 50px;
+      padding: 7px 24px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--green-dark);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.10);
+    }
+
+    header h1 {
+      font-family: 'Pacifico', cursive;
+      font-size: clamp(28px, 6vw, 42px);
+      color: #fff;
+      text-shadow: 0 3px 0 rgba(0, 0, 0, 0.12);
+      text-align: center;
+    }
+
+    header p {
+      color: rgba(255, 255, 255, 0.95);
+      font-size: 16px;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .hd {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.07);
+    }
+
+    .hd.a {
+      width: 180px;
+      height: 180px;
+      top: -60px;
+      right: -40px;
+    }
+
+    .hd.b {
+      width: 130px;
+      height: 130px;
+      bottom: -55px;
+      left: -35px;
+    }
+
+    /* ===== LAYOUT ===== */
+    main {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 20px 16px 60px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    /* ===== CARD ===== */
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 22px 20px;
+      border: 2px solid rgba(42, 168, 90, 0.15);
+      animation: fadeUp .35s ease both;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .card-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 18px;
+      font-weight: 900;
+      margin-bottom: 18px;
+      color: var(--text);
+      border-bottom: 2.5px solid var(--green-light);
+      padding-bottom: 12px;
+    }
+
+    .card-title .icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 11px;
+      background: var(--green-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    /* ===== FIELDS ===== */
+    .fg {
+      display: grid;
+      gap: 16px;
+    }
+
+    .fg.g2 {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    @media(max-width:500px) {
+      .fg.g2 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .f {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .f label {
+      font-size: var(--fs-label);
+      font-weight: 800;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .req {
+      color: var(--coral);
+      font-size: 18px;
+    }
+
+    .opt {
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 13px;
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    input[type="email"],
+    textarea,
+    select {
+      border: 2.5px solid var(--border);
+      border-radius: 11px;
+      padding: 13px 16px;
+      font-family: 'Nunito', sans-serif;
+      font-size: var(--fs-input);
+      font-weight: 600;
+      color: var(--text);
+      background: #f8fefb;
+      outline: none;
+      width: 100%;
+      transition: border-color .18s, box-shadow .18s;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: var(--green);
+      box-shadow: 0 0 0 4px rgba(42, 168, 90, 0.15);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    select {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1l6 6 6-6' stroke='%235a7a62' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 40px;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: #a0bca8;
+      font-weight: 600;
+    }
+
+    /* ===== ITEM CARD ===== */
+    .items-list {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .item-card {
+      background: #f5fdf7;
+      border: 2.5px solid #c2e8ce;
+      border-radius: 14px;
+      padding: 18px;
+      animation: fadeUp .3s ease;
+    }
+
+    .item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .item-badge {
+      font-size: 13px;
+      font-weight: 900;
+      color: var(--green-dark);
+      background: var(--green-light);
+      padding: 5px 14px;
+      border-radius: 20px;
+    }
+
+    .btn-del-item {
+      background: #ffe0e0;
+      border: 2px solid #f5b8b8;
+      color: var(--coral);
+      width: 36px;
+      height: 36px;
+      border-radius: 9px;
+      cursor: pointer;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .2s;
+      flex-shrink: 0;
+    }
+
+    .btn-del-item:hover {
+      background: #ffc8c8;
+    }
+
+    .item-section {
+      margin-bottom: 16px;
+    }
+
+    .item-section:last-child {
+      margin-bottom: 0;
+    }
+
+    .item-section-label {
+      font-size: 14px;
+      font-weight: 900;
+      color: var(--text);
+      text-transform: uppercase;
+      letter-spacing: .4px;
+      margin-bottom: 9px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    /* ===== COLOR PICKER ===== */
+    .color-trigger {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border: 2.5px solid var(--border);
+      border-radius: 11px;
+      padding: 12px 16px;
+      background: #f8fefb;
+      cursor: pointer;
+      font-size: var(--fs-input);
+      font-weight: 700;
+      transition: border-color .18s, box-shadow .18s;
+      user-select: none;
+      min-height: 52px;
+    }
+
+    .color-trigger:hover,
+    .color-trigger.open {
+      border-color: var(--green);
+      box-shadow: 0 0 0 4px rgba(42, 168, 90, 0.15);
+    }
+
+    .color-dot {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      border: 2.5px solid rgba(0, 0, 0, 0.12);
+      flex-shrink: 0;
+    }
+
+    .color-trigger-text {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .color-trigger-arrow {
+      font-size: 12px;
+      color: var(--muted);
+      flex-shrink: 0;
+      transition: transform .2s;
+    }
+
+    .color-trigger.open .color-trigger-arrow {
+      transform: rotate(180deg);
+    }
+
+    .color-grid {
+      display: none;
+      grid-template-columns: repeat(auto-fill, minmax(68px, 1fr));
+      gap: 8px;
+      padding: 14px;
+      background: #fff;
+      border: 2.5px solid var(--border);
+      border-radius: 13px;
+      margin-top: 6px;
+    }
+
+    .color-grid.open {
+      display: grid;
+    }
+
+    .color-chip {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      padding: 8px 4px;
+      border-radius: 10px;
+      cursor: pointer;
+      border: 2.5px solid transparent;
+      transition: all .15s;
+    }
+
+    .color-chip:hover {
+      background: #eaf7ef;
+      border-color: #a8d8b8;
+    }
+
+    .color-chip.active {
+      border-color: var(--green);
+      background: var(--green-light);
+    }
+
+    .chip-dot {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      border: 2px solid rgba(0, 0, 0, 0.10);
+    }
+
+    .chip-name {
+      font-size: 10px;
+      font-weight: 800;
+      color: var(--text);
+      text-align: center;
+      line-height: 1.3;
+    }
+
+    /* ===== SIZE ===== */
+    .size-group {
+      margin-bottom: 12px;
+    }
+
+    .size-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .size-group-label {
+      font-size: 13px;
+      font-weight: 900;
+      color: var(--green-dark);
+      background: var(--green-light);
+      display: inline-block;
+      padding: 3px 12px;
+      border-radius: 20px;
+      margin-bottom: 8px;
+    }
+
+    .size-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .size-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .size-box-label {
+      font-size: 13px;
+      font-weight: 900;
+      color: var(--green-dark);
+    }
+
+    .size-box input {
+      width: 56px;
+      text-align: center;
+      padding: 9px 2px;
+      border-radius: 10px;
+      border: 2.5px solid var(--border);
+      font-family: 'Nunito', sans-serif;
+      font-size: 16px;
+      font-weight: 800;
+      background: #fff;
+      outline: none;
+      transition: border-color .18s;
+    }
+
+    .size-box input:focus {
+      border-color: var(--green);
+      box-shadow: 0 0 0 3px rgba(42, 168, 90, 0.15);
+    }
+
+    .size-box input::-webkit-inner-spin-button {
+      opacity: .7;
+    }
+
+    /* ===== DESAIN ===== */
+    .desain-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .desain-block {
+      background: #fff;
+      border: 2.5px solid var(--border);
+      border-radius: 13px;
+      overflow: hidden;
+    }
+
+    .desain-block-head {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 11px 16px;
+      background: #edf9f1;
+      border-bottom: 2px solid var(--border);
+      font-size: 15px;
+      font-weight: 900;
+      color: var(--text);
+    }
+
+    .desain-block-body {
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+    }
+
+    .desain-block-body textarea {
+      border: 2.5px solid var(--border);
+      border-radius: 10px;
+      padding: 11px 14px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 15px;
+      width: 100%;
+      outline: none;
+      min-height: 68px;
+      resize: vertical;
+      color: var(--text);
+      background: #f8fefb;
+      transition: border-color .18s;
+    }
+
+    .desain-block-body textarea:focus {
+      border-color: var(--green);
+    }
+
+    .desain-block-body textarea::placeholder {
+      color: #a0bca8;
+      font-weight: 600;
+    }
+
+    /* ===== FILE ROWS ===== */
+    .file-section-label {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .file-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .file-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #edf9f1;
+      border: 2.5px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 12px;
+    }
+
+    .file-row-name {
+      flex: 1;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      min-width: 0;
+    }
+
+    .file-row-name.empty {
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .file-row-pick {
+      background: var(--green-light);
+      border: 2px solid #a8d8b8;
+      color: var(--green-dark);
+      padding: 7px 14px;
+      border-radius: 9px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 13px;
+      font-weight: 900;
+      cursor: pointer;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: background .2s;
+    }
+
+    .file-row-pick:hover {
+      background: #b0e8c0;
+    }
+
+    .file-row-del {
+      background: #ffe0e0;
+      border: 2px solid #f5b8b8;
+      color: var(--coral);
+      width: 34px;
+      height: 34px;
+      border-radius: 9px;
+      font-size: 16px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: background .2s;
+    }
+
+    .file-row-del:hover {
+      background: #ffc8c8;
+    }
+
+    .file-hidden {
+      display: none;
+    }
+
+    .btn-add-file {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: transparent;
+      border: 2.5px dashed #a8d8b8;
+      border-radius: 10px;
+      padding: 8px 16px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 13px;
+      font-weight: 900;
+      color: var(--green-dark);
+      cursor: pointer;
+      transition: all .2s;
+      width: fit-content;
+    }
+
+    .btn-add-file:hover {
+      background: var(--green-light);
+    }
+
+    /* FILE SIZE WARNING */
+    .file-size-warn {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      background: #fff8e0;
+      border: 2px solid #f0c830;
+      border-radius: 10px;
+      padding: 10px 13px;
+      margin-top: 6px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #7a5500;
+      line-height: 1.5;
+    }
+
+    .file-size-ok {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--green-dark);
+      margin-top: 5px;
+    }
+
+    /* ===== ADD ITEM ===== */
+    .btn-add-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      width: 100%;
+      padding: 16px;
+      border: 3px dashed var(--green);
+      border-radius: 13px;
+      background: transparent;
+      color: var(--green-dark);
+      font-family: 'Nunito', sans-serif;
+      font-size: var(--fs-btn);
+      font-weight: 900;
+      cursor: pointer;
+      transition: all .2s;
+      margin-top: 14px;
+    }
+
+    .btn-add-item:hover {
+      background: var(--green-light);
+    }
+
+    /* ===== SUMMARY ===== */
+    .summary-card {
+      background: linear-gradient(135deg, #143020 0%, #1e4a30 100%);
+      border-radius: var(--radius);
+      padding: 22px;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+      animation: fadeUp .35s .14s ease both;
+    }
+
+    .summary-card::before {
+      content: '🌿';
+      position: absolute;
+      font-size: 80px;
+      right: -8px;
+      top: -8px;
+      opacity: 0.07;
+    }
+
+    .sum-title {
+      font-size: 18px;
+      font-weight: 900;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .sum-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .sum-stat {
+      background: rgba(255, 255, 255, 0.09);
+      border-radius: 12px;
+      padding: 14px 16px;
+      border: 2px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .sum-stat-label {
+      font-size: 12px;
+      opacity: .7;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+
+    .sum-stat-val {
+      font-size: 32px;
+      font-weight: 900;
+      color: var(--yellow);
+      line-height: 1.1;
+    }
+
+    .sum-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .sum-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.07);
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-size: 15px;
+      gap: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .sum-row-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .sum-row-name {
+      font-weight: 800;
+      font-size: 15px;
+    }
+
+    .sum-row-detail {
+      opacity: .65;
+      font-size: 13px;
+      margin-top: 3px;
+    }
+
+    .sum-pcs {
+      background: var(--yellow);
+      color: #111f16;
+      font-weight: 900;
+      font-size: 15px;
+      padding: 4px 14px;
+      border-radius: 20px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .sum-empty {
+      text-align: center;
+      opacity: .5;
+      font-size: 15px;
+      padding: 16px 0;
+    }
+
+    /* ===== SYARAT ===== */
+    .syarat {
+      background: #fffbe6;
+      border: 2.5px solid #f0c830;
+      border-radius: 14px;
+      padding: 18px 20px;
+      animation: fadeUp .35s .2s ease both;
+    }
+
+    .syarat h4 {
+      font-size: 16px;
+      font-weight: 900;
+      color: #7a5500;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .syarat ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .syarat li {
+      font-size: 14px;
+      color: #5a4000;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      line-height: 1.6;
+    }
+
+    .syarat li::before {
+      content: '✅';
+      font-size: 14px;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    .syarat li span {
+      flex: 1;
+    }
+
+    .agree-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 2px solid #f0c830;
+    }
+
+    .agree-row input[type="checkbox"] {
+      width: 22px;
+      height: 22px;
+      accent-color: var(--green);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .agree-row label {
+      font-size: 15px;
+      font-weight: 800;
+      color: #5a4000;
+      cursor: pointer;
+      line-height: 1.5;
+    }
+
+    /* ===== UPLOAD PROGRESS ===== */
+    .upload-progress-wrap {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
+      z-index: 1001;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .upload-progress-box {
+      background: #fff;
+      border-radius: 18px;
+      padding: 30px 24px;
+      max-width: 340px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+    }
+
+    .upload-progress-title {
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .upload-progress-sub {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 600;
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+
+    .progress-bar-wrap {
+      background: #e0f5e8;
+      border-radius: 50px;
+      height: 14px;
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--green), var(--green-dark));
+      border-radius: 50px;
+      transition: width .35s ease;
+    }
+
+    .progress-label {
+      font-size: 14px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    /* ===== WA BUTTON ===== */
+    .btn-wa {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      width: 100%;
+      padding: 20px 24px;
+      border-radius: 16px;
+      border: none;
+      background: #25d366;
+      color: #fff;
+      font-family: 'Nunito', sans-serif;
+      font-size: var(--fs-btn);
+      font-weight: 900;
+      cursor: pointer;
+      transition: all .2s;
+      box-shadow: 0 5px 24px rgba(37, 211, 102, 0.38);
+      animation: fadeUp .35s .26s ease both;
+      letter-spacing: .2px;
+    }
+
+    .btn-wa:hover {
+      background: #1db954;
+      box-shadow: 0 7px 28px rgba(37, 211, 102, 0.48);
+      transform: translateY(-2px);
+    }
+
+    .btn-wa:active {
+      transform: scale(0.98);
+    }
+
+    .btn-wa:disabled {
+      opacity: .65;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-wa svg {
+      width: 26px;
+      height: 26px;
+      flex-shrink: 0;
+    }
+
+    /* ===== TOAST ===== */
+    #toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: var(--green-dark);
+      color: #fff;
+      padding: 14px 26px;
+      border-radius: 50px;
+      font-weight: 800;
+      font-size: 15px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+      transition: transform .32s cubic-bezier(.34, 1.56, .64, 1);
+      z-index: 999;
+      white-space: nowrap;
+      pointer-events: none;
+    }
+
+    #toast.show {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 700;
+      padding: 4px 16px 30px;
+    }
+
+    footer span {
+      color: var(--green-dark);
+    }
+
+    @media(max-width:420px) {
+      .size-box input {
+        width: 50px;
+        font-size: 15px;
+      }
+
+      .color-grid {
+        grid-template-columns: repeat(auto-fill, minmax(58px, 1fr));
+      }
+
+      main {
+        padding: 14px 12px 60px;
+      }
+
+      .card {
+        padding: 18px 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="hd a"></div>
+    <div class="hd b"></div>
+    <div class="header-inner">
+      <div class="logo-badge">🍀 Clovertees</div>
+      <h1>Form Pemesanan</h1>
+      <p>Silakan isi data pesanan kamu dengan lengkap 👕</p>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- INFORMASI PEMESAN -->
+    <div class="card" style="animation-delay:.05s">
+      <div class="card-title">
+        <div class="icon">👤</div>Data Pemesan
+      </div>
+      <div class="fg g2">
+        <div class="f">
+          <label>Nama Lengkap <span class="req">*</span></label>
+          <input type="text" id="nama" placeholder="Contoh: Clovertees" />
+        </div>
+        <div class="f">
+          <label>Nomor WhatsApp <span class="req">*</span></label>
+          <input type="tel" id="wa" placeholder="Contoh: 08123456789" />
+        </div>
+        <div class="f">
+          <label>Instagram <span class="opt">(Opsional)</span></label>
+          <input type="text" id="ig" placeholder="@username" />
+        </div>
+        <div class="f" style="grid-column:1/-1">
+          <label>Alamat Lengkap <span class="req">*</span></label>
+          <textarea id="alamat" placeholder="Jalan, kecamatan, kota, provinsi, kode pos..."></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- DETAIL PESANAN -->
+    <div class="card" style="animation-delay:.1s">
+      <div class="card-title">
+        <div class="icon">👕</div>Detail Pesanan
+      </div>
+      <div class="items-list" id="itemsList"></div>
+      <button class="btn-add-item" onclick="addItem()">＋ Tambah Item Pesanan</button>
+    </div>
+
+    <!-- RINGKASAN -->
+    <div class="summary-card">
+      <div class="sum-title">📋 Ringkasan Pesanan</div>
+      <div class="sum-stats">
+        <div class="sum-stat">
+          <div class="sum-stat-label">Total Item</div>
+          <div class="sum-stat-val" id="totalItem">0</div>
+        </div>
+        <div class="sum-stat">
+          <div class="sum-stat-label">Total PCS</div>
+          <div class="sum-stat-val" id="totalPcs">0</div>
+        </div>
+      </div>
+      <div class="sum-rows" id="sumRows">
+        <div class="sum-empty">Belum ada item ditambahkan</div>
+      </div>
+    </div>
+
+    <!-- SYARAT -->
+    <div class="syarat">
+      <h4>⚠️ Mohon Diperhatikan!</h4>
+      <ul>
+        <li><span>Setelah data dikirim, warna dan ukuran <strong>tidak dapat diganti</strong></span></li>
+        <li><span>Desain diproses sesuai antrian — yang transfer duluan, diproses duluan</span></li>
+        <li><span>Proses pembuatan <strong>±4–7 hari kerja</strong> setelah approve desain (tergantung qty)</span></li>
+        <li><span>Toleransi ukuran <strong>±1–3 cm</strong></span></li>
+        <li><span>Kids &amp; dress: Cotton Combed 24s &nbsp;|&nbsp; Dewasa: Cotton Combed 30s</span></li>
+      </ul>
+      <div class="agree-row">
+        <input type="checkbox" id="agree" />
+        <label for="agree">Saya sudah membaca dan menyetujui syarat di atas</label>
+      </div>
+    </div>
+
+    <!-- KIRIM -->
+    <button class="btn-wa" onclick="sendOrder()">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path
+          d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+        <path
+          d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.533 5.854L0 24l6.318-1.658A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.967 0-3.808-.525-5.395-1.444l-.386-.228-4.001 1.05 1.069-3.9-.25-.398A9.956 9.956 0 012 12c0-5.514 4.486-10 10-10s10 4.486 10 10-4.486 10-10 10z" />
+      </svg>
+      Kirim Pesanan via WhatsApp
+    </button>
+
+  </main>
+
+  <footer>Dibuat dengan ❤️ oleh <span>Clovertees</span> — Thankyou for trusting us!</footer>
+  <div id="toast"></div>
+
+  <script>
+    // ════════════════════════════════════════════════════
+    //  CONFIG — GANTI SESUAI KEBUTUHAN
+    // ════════════════════════════════════════════════════
+    const WA_NUMBER = '6282363560267';
+    // ▼ Ganti dengan URL GAS Proyek 5 yang baru setelah deploy
+    const GAS_URL = 'https://script.google.com/macros/s/AKfycbx9bmvz8u4nMUQZIvkJotkazDHvGoa5HRQFOXwJBJ5bNI6E9Z86RWLNCLU3JWx9kEA9/exec';
+
+    // ════════════════════════════════════════════════════
+    //  DATA — JENIS, WARNA, UKURAN (identik dengan aslinya)
+    // ════════════════════════════════════════════════════
+    const COLOR_OPT = {
+      kaos: ["BLACK", "WHITE", "SOFT PINK", "NEON PINK", "RED", "MAROON", "LILAC", "SKY BLUE", "ROYAL BLUE", "NAVY BLUE", "NEON YELLOW", "TOSCA", "GREEN", "FOREST GREEN", "YELLOW", "ORANGE", "MUSTARD"],
+      dress: ["BLACK", "WHITE", "RED", "YELLOW"],
+      kaos_panjang: ["BLACK", "WHITE", "SOFT PINK", "RED", "MAROON", "SKY BLUE", "ROYAL BLUE", "NAVY BLUE", "NEON YELLOW", "TOSCA", "GREEN", "FOREST GREEN", "YELLOW", "MUSTARD"]
+    };
+    const COLOR_HEX = {
+      BLACK: "#000000", WHITE: "#ffffff", "SOFT PINK": "#f8c6d0", "NEON PINK": "#ff69b4", RED: "#dc143c",
+      MAROON: "#800000", LILAC: "#c8a2c8", "SKY BLUE": "#87ceeb", "ROYAL BLUE": "#154df5", "NAVY BLUE": "#130152",
+      "NEON YELLOW": "#bbff00", TOSCA: "#40e0d0", GREEN: "#008000", "FOREST GREEN": "#053a05", YELLOW: "#ffff00",
+      ORANGE: "#ffa500", MUSTARD: "#ffd027"
+    };
+    const SIZE_OPT = {
+      kaos: { dewasa: ["XS", "S", "M", "L", "XL", "2XL", "3XL"], anak: ["XS", "S", "M", "L", "XL"] },
+      dress: { dewasa: ["S", "M", "L"], anak: ["S", "M", "L", "XL"] },
+      kaos_panjang: { dewasa: ["XS", "S", "M", "L", "XL", "2XL", "3XL"], anak: ["XS", "S", "M", "L", "XL"] }
+    };
+    const JENIS_LABEL = { kaos: "Kaos (T-Shirt)", dress: "Dress", kaos_panjang: "Kaos Lengan Panjang" };
+    const SISI_LIST = [
+      { key: "depan", icon: "👕", label: "Desain Depan" },
+      { key: "belakang", icon: "🔄", label: "Desain Belakang" },
+      { key: "lengan", icon: "💪", label: "Desain Lengan" }
+    ];
+
+    // ════════════════════════════════════════════════════
+    //  STATE
+    // ════════════════════════════════════════════════════
+    let items = [];
+    let uid = 0;
+
+    function mkItem() {
+      uid++;
+      return {
+        id: uid, jenis: '', warna: '', _open: false,
+        sizes: { dewasa: {}, anak: {} },
+        desain: {
+          depan: { text: '', files: [{ name: '', file: null }] },
+          belakang: { text: '', files: [{ name: '', file: null }] },
+          lengan: { text: '', files: [{ name: '', file: null }] }
+        }
+      };
+    }
+
+    window.onload = () => { items.push(mkItem()); render(); };
+
+    // ════════════════════════════════════════════════════
+    //  ADD / REMOVE ITEM
+    // ════════════════════════════════════════════════════
+    function addItem() {
+      items.push(mkItem());
+      render();
+      setTimeout(() => {
+        const last = document.querySelector('.item-card:last-child');
+        if (last) last.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+    }
+    function removeItem(id) {
+      items = items.filter(i => i.id !== id);
+      render(); updateSummary();
+    }
+
+    // ════════════════════════════════════════════════════
+    //  RENDER
+    // ════════════════════════════════════════════════════
+    function render() {
+      const list = document.getElementById('itemsList');
+      list.innerHTML = '';
+      items.forEach((item, idx) => {
+        const el = document.createElement('div');
+        el.className = 'item-card';
+        el.id = `item-${item.id}`;
+        const colors = item.jenis ? (COLOR_OPT[item.jenis] || []) : [];
+        const sizes = item.jenis ? SIZE_OPT[item.jenis] : null;
+        el.innerHTML =
+          `<div class="item-header">
+         <span class="item-badge">Item #${idx + 1}</span>
+         ${items.length > 1 ? `<button class="btn-del-item" onclick="removeItem(${item.id})" title="Hapus item">✕</button>` : ''}
+       </div>
+       <div class="item-section">
+         <div class="item-section-label">Jenis Pakaian <span class="req">*</span></div>
+         <select onchange="onJenis(${item.id},this.value)">
+           <option value="">-- Pilih Jenis --</option>
+           ${Object.entries(JENIS_LABEL).map(([k, v]) => `<option value="${k}"${item.jenis === k ? ' selected' : ''}>${v}</option>`).join('')}
+         </select>
+       </div>
+       <div class="item-section">
+         <div class="item-section-label">Warna Baju <span class="req">*</span></div>
+         ${colors.length ? `
+           <div class="color-trigger${item._open ? ' open' : ''}" onclick="togglePalette(${item.id})">
+             <div class="color-dot" style="background:${item.warna ? COLOR_HEX[item.warna] : '#e8f5ee'};${item.warna === 'WHITE' ? 'border:2px solid #ccc' : ''}"></div>
+             <span class="color-trigger-text">${item.warna || 'Pilih warna...'}</span>
+             <span class="color-trigger-arrow">▼</span>
+           </div>
+           <div class="color-grid${item._open ? ' open' : ''}" id="cgrid-${item.id}">
+             ${colors.map(c => `
+               <div class="color-chip${item.warna === c ? ' active' : ''}" onclick="onWarna(${item.id},'${c}')">
+                 <div class="chip-dot" style="background:${COLOR_HEX[c]};${c === 'WHITE' ? 'border:1.5px solid #ccc' : ''}"></div>
+                 <span class="chip-name">${c}</span>
+               </div>`).join('')}
+           </div>
+         ` : `<div style="font-size:13px;color:var(--muted);font-weight:600;padding:6px 0">← Pilih jenis pakaian dulu</div>`}
+       </div>
+       <div class="item-section">
+         <div class="item-section-label">Jumlah per Ukuran <span class="req">*</span></div>
+         ${sizes ? renderSizes(item, sizes) : `<div style="font-size:13px;color:var(--muted);font-weight:600;padding:6px 0">← Pilih jenis pakaian dulu</div>`}
+       </div>
+       <div class="item-section">
+         <div class="item-section-label">Rincian Desain</div>
+         <div class="desain-list">
+           ${SISI_LIST.map(s => renderDesain(item, s)).join('')}
+         </div>
+       </div>`;
+        list.appendChild(el);
+      });
+      updateSummary();
+    }
+
+    // ════════════════════════════════════════════════════
+    //  RENDER HELPERS
+    // ════════════════════════════════════════════════════
+    function renderSizes(item, sz) {
+      let h = '';
+      if (sz.dewasa?.length) h += `
+    <div class="size-group">
+      <div class="size-group-label">Dewasa</div>
+      <div class="size-row">
+        ${sz.dewasa.map(s => `
+          <div class="size-box">
+            <span class="size-box-label">${s}</span>
+            <input type="number" min="0" placeholder="0"
+              value="${item.sizes.dewasa[s] || ''}"
+              oninput="onSize(${item.id},'dewasa','${s}',this.value)"/>
+          </div>`).join('')}
+      </div>
+    </div>`;
+      if (sz.anak?.length) h += `
+    <div class="size-group">
+      <div class="size-group-label">Anak</div>
+      <div class="size-row">
+        ${sz.anak.map(s => `
+          <div class="size-box">
+            <span class="size-box-label">${s}</span>
+            <input type="number" min="0" placeholder="0"
+              value="${item.sizes.anak[s] || ''}"
+              oninput="onSize(${item.id},'anak','${s}',this.value)"/>
+          </div>`).join('')}
+      </div>
+    </div>`;
+      return h;
+    }
+
+    function renderDesain(item, { key, icon, label }) {
+      const d = item.desain[key];
+      const filesHtml = d.files.map((f, fi) => `
+    <div class="file-row" id="fr-${item.id}-${key}-${fi}">
+      <span class="file-row-name${f.name ? '' : ' empty'}">${f.name || 'Belum ada file dipilih'}</span>
+      <label class="file-row-pick" onclick="pickFile(${item.id},'${key}',${fi})">Pilih</label>
+      <input type="file" class="file-hidden" id="fi-${item.id}-${key}-${fi}"
+        accept="image/*,.pdf,.ai,.psd"
+        onchange="onFile(${item.id},'${key}',${fi},this)"/>
+      <button class="file-row-del" onclick="delFile(${item.id},'${key}',${fi})" title="Hapus baris ini">✕</button>
+    </div>`).join('');
+      return `
+    <div class="desain-block">
+      <div class="desain-block-head"><span>${icon}</span>${label}</div>
+      <div class="desain-block-body">
+        <textarea placeholder="Deskripsi desain ${label.toLowerCase()}, contoh: logo di tengah, teks merah..."
+          oninput="onDesainText(${item.id},'${key}',this.value)">${d.text}</textarea>
+        <div>
+          <div class="file-section-label">📎 File Desain (gambar / AI / PSD)</div>
+          <div class="file-rows" id="frows-${item.id}-${key}">${filesHtml}</div>
+          <button class="btn-add-file" onclick="addFile(${item.id},'${key}')" style="margin-top:6px">＋ Tambah File</button>
+        </div>
+      </div>
+    </div>`;
+    }
+
+    // ════════════════════════════════════════════════════
+    //  EVENT HANDLERS
+    // ════════════════════════════════════════════════════
+    function onJenis(id, val) {
+      const it = find(id); if (!it) return;
+      it.jenis = val; it.warna = ''; it._open = false;
+      it.sizes = { dewasa: {}, anak: {} };
+      render();
+    }
+    function togglePalette(id) {
+      const it = find(id); if (!it) return;
+      it._open = !it._open;
+      const trigger = document.querySelector(`#item-${id} .color-trigger`);
+      const grid = document.getElementById(`cgrid-${id}`);
+      if (trigger) trigger.classList.toggle('open', it._open);
+      if (grid) grid.classList.toggle('open', it._open);
+    }
+    function onWarna(id, warna) {
+      const it = find(id); if (!it) return;
+      it.warna = warna; it._open = false;
+      const trigger = document.querySelector(`#item-${id} .color-trigger`);
+      const grid = document.getElementById(`cgrid-${id}`);
+      if (trigger) {
+        trigger.classList.remove('open');
+        const dot = trigger.querySelector('.color-dot');
+        const txt = trigger.querySelector('.color-trigger-text');
+        if (dot) { dot.style.background = COLOR_HEX[warna]; dot.style.border = warna === 'WHITE' ? '2px solid #ccc' : '2px solid rgba(0,0,0,.10)'; }
+        if (txt) txt.textContent = warna;
+      }
+      if (grid) {
+        grid.classList.remove('open');
+        grid.querySelectorAll('.color-chip').forEach(c => {
+          c.classList.toggle('active', c.textContent.trim() === warna);
+        });
+      }
+      updateSummary();
+    }
+    function onSize(id, kat, sz, val) {
+      const it = find(id); if (!it) return;
+      it.sizes[kat][sz] = parseInt(val) || 0;
+      updateSummary();
+    }
+    function onDesainText(id, key, val) {
+      const it = find(id); if (!it) return;
+      it.desain[key].text = val;
+    }
+
+    // ════════════════════════════════════════════════════
+    //  FILE MANAGEMENT
+    // ════════════════════════════════════════════════════
+    function pickFile(id, key, fi) {
+      const inp = document.getElementById(`fi-${id}-${key}-${fi}`);
+      if (inp) inp.click();
+    }
+
+    const MAX_FILE_MB = 10;
+    const WARN_FILE_MB = 5;
+    const MAX_FILE_BYTES = MAX_FILE_MB * 1024 * 1024;
+
+    function onFile(id, key, fi, input) {
+      const it = find(id); if (!it) return;
+      const f = input.files[0];
+      const rowEl = document.getElementById(`fr-${id}-${key}-${fi}`);
+      const nameEl = rowEl?.querySelector('.file-row-name');
+      rowEl?.querySelector('.file-size-warn')?.remove();
+      rowEl?.querySelector('.file-size-ok')?.remove();
+      if (!f) {
+        it.desain[key].files[fi] = { name: '', file: null, tooBig: false };
+        if (nameEl) { nameEl.textContent = 'Belum ada file dipilih'; nameEl.classList.add('empty'); }
+        return;
+      }
+      const fileMB = f.size / (1024 * 1024);
+      const tooBig = f.size > MAX_FILE_BYTES;
+      it.desain[key].files[fi] = { name: f.name, file: tooBig ? null : f, tooBig, sizeMB: fileMB.toFixed(1) };
+      if (nameEl) { nameEl.textContent = f.name; nameEl.classList.remove('empty'); nameEl.style.color = tooBig ? 'var(--coral)' : ''; }
+      if (tooBig) {
+        input.value = '';
+        it.desain[key].files[fi].file = null;
+        const warn = document.createElement('div');
+        warn.className = 'file-size-warn';
+        warn.innerHTML = `<span>⚠️</span><span>File <strong>${f.name}</strong> terlalu besar (${fileMB.toFixed(1)} MB, maks ${MAX_FILE_MB} MB).<br>Kirimkan file ini langsung ke admin via WhatsApp setelah order selesai.</span>`;
+        rowEl?.insertAdjacentElement('afterend', warn);
+      } else if (fileMB >= WARN_FILE_MB) {
+        const info = document.createElement('div');
+        info.className = 'file-size-ok';
+        info.innerHTML = `<span>✓</span><span>${f.name} (${fileMB.toFixed(1)} MB) — proses upload mungkin sedikit lebih lama</span>`;
+        rowEl?.insertAdjacentElement('afterend', info);
+      }
+    }
+
+    function addFile(id, key) {
+      const it = find(id); if (!it) return;
+      const fi = it.desain[key].files.length;
+      it.desain[key].files.push({ name: '', file: null, tooBig: false });
+      const container = document.getElementById(`frows-${id}-${key}`);
+      if (!container) return;
+      const row = document.createElement('div');
+      row.className = 'file-row'; row.id = `fr-${id}-${key}-${fi}`;
+      row.innerHTML = `
+    <span class="file-row-name empty">Belum ada file dipilih</span>
+    <label class="file-row-pick" onclick="pickFile(${id},'${key}',${fi})">Pilih</label>
+    <input type="file" class="file-hidden" id="fi-${id}-${key}-${fi}"
+      accept="image/*,.pdf,.ai,.psd"
+      onchange="onFile(${id},'${key}',${fi},this)"/>
+    <button class="file-row-del" onclick="delFile(${id},'${key}',${fi})" title="Hapus baris ini">✕</button>`;
+      container.appendChild(row);
+    }
+
+    function delFile(id, key, fi) {
+      const it = find(id); if (!it) return;
+      const files = it.desain[key].files;
+      if (files.length === 1) {
+        files[0] = { name: '', file: null };
+        const nameEl = document.querySelector(`#fr-${id}-${key}-0 .file-row-name`);
+        const inp = document.getElementById(`fi-${id}-${key}-0`);
+        if (nameEl) { nameEl.textContent = 'Belum ada file dipilih'; nameEl.classList.add('empty'); }
+        if (inp) inp.value = '';
+        return;
+      }
+      files.splice(fi, 1);
+      document.getElementById(`fr-${id}-${key}-${fi}`)?.remove();
+      const container = document.getElementById(`frows-${id}-${key}`);
+      if (container) {
+        Array.from(container.children).forEach((rowEl, newFi) => {
+          rowEl.id = `fr-${id}-${key}-${newFi}`;
+          const pick = rowEl.querySelector('.file-row-pick');
+          const inp2 = rowEl.querySelector('input[type="file"]');
+          const del2 = rowEl.querySelector('.file-row-del');
+          if (pick) pick.setAttribute('onclick', `pickFile(${id},'${key}',${newFi})`);
+          if (inp2) { inp2.id = `fi-${id}-${key}-${newFi}`; inp2.setAttribute('onchange', `onFile(${id},'${key}',${newFi},this)`); }
+          if (del2) del2.setAttribute('onclick', `delFile(${id},'${key}',${newFi})`);
+        });
+      }
+    }
+
+    // ════════════════════════════════════════════════════
+    //  SUMMARY
+    // ════════════════════════════════════════════════════
+    function pcsOf(item) {
+      let n = 0;
+      Object.values(item.sizes.dewasa).forEach(v => n += v);
+      Object.values(item.sizes.anak).forEach(v => n += v);
+      return n;
+    }
+    function updateSummary() {
+      let tot = 0;
+      const box = document.getElementById('sumRows');
+      box.innerHTML = '';
+      if (!items.length) {
+        box.innerHTML = '<div class="sum-empty">Belum ada item ditambahkan 😊</div>';
+      } else {
+        items.forEach((item, idx) => {
+          const pcs = pcsOf(item); tot += pcs;
+          const hex = item.warna ? COLOR_HEX[item.warna] : '#999';
+          const sp = [];
+          Object.entries(item.sizes.dewasa).filter(([, v]) => v > 0).forEach(([k, v]) => sp.push(`${k}(${v})`));
+          Object.entries(item.sizes.anak).filter(([, v]) => v > 0).forEach(([k, v]) => sp.push(`Anak-${k}(${v})`));
+          const r = document.createElement('div');
+          r.className = 'sum-row';
+          r.innerHTML = `
+        <div class="sum-row-info">
+          <div class="sum-row-name">${JENIS_LABEL[item.jenis] || 'Item #' + (idx + 1)}</div>
+          <div class="sum-row-detail">
+            <span style="display:inline-block;width:9px;height:9px;border-radius:3px;background:${hex};border:1px solid rgba(255,255,255,0.2);margin-right:4px;vertical-align:middle"></span>${item.warna || '-'} · ${sp.join(', ') || 'Ukuran belum diisi'}
+          </div>
+        </div>
+        <span class="sum-pcs">${pcs} pcs</span>`;
+          box.appendChild(r);
+        });
+      }
+      document.getElementById('totalItem').textContent = items.length;
+      document.getElementById('totalPcs').textContent = tot;
+    }
+
+    // ════════════════════════════════════════════════════
+    //  VALIDATE
+    // ════════════════════════════════════════════════════
+    function validate() {
+      const nama = document.getElementById('nama').value.trim();
+      const wa = document.getElementById('wa').value.trim();
+      const alamat = document.getElementById('alamat').value.trim();
+      const agree = document.getElementById('agree').checked;
+      if (!nama || !wa || !alamat) { toast('⚠️ Lengkapi informasi pemesan ya!', '#e67e22'); return false; }
+      if (!items.length) { toast('⚠️ Tambah minimal 1 item!', '#e67e22'); return false; }
+      for (let i = 0; i < items.length; i++) {
+        const it = items[i];
+        if (!it.jenis) { toast(`⚠️ Pilih jenis pakaian item #${i + 1}!`, '#e67e22'); return false; }
+        if (!it.warna) { toast(`⚠️ Pilih warna item #${i + 1}!`, '#e67e22'); return false; }
+        if (pcsOf(it) === 0) { toast(`⚠️ Isi jumlah PCS item #${i + 1}!`, '#e67e22'); return false; }
+      }
+      if (!agree) { toast('⚠️ Setujui syarat & ketentuan dulu ya!', '#e67e22'); return false; }
+      return true;
+    }
+
+    // ════════════════════════════════════════════════════
+    //  BUILD WA TEXT  (dipanggil setelah dapat no_pesanan)
+    // ════════════════════════════════════════════════════
+    function buildWAText(noPesanan) {
+      const nama = document.getElementById('nama').value.trim();
+      const wa = document.getElementById('wa').value.trim();
+      const ig = document.getElementById('ig').value.trim();
+      const alamat = document.getElementById('alamat').value.trim();
+      let t = '*PESANAN BARU - CLOVERTEES*\n';
+      t += `*No. Pesanan: ${noPesanan}*\n\n`;
+      t += `*Informasi Pemesan*\n- Nama: ${nama}\n- WhatsApp: ${wa}\n`;
+      if (ig) t += `- Instagram: ${ig}\n`;
+      t += `- Alamat: ${alamat}\n\n`;
+      t += '*Detail Pesanan*';
+      items.forEach((item, idx) => {
+        const pcs = pcsOf(item);
+        const spD = [], spA = [];
+        Object.entries(item.sizes.dewasa).filter(([, v]) => v > 0).forEach(([k, v]) => spD.push(`${k}:${v}`));
+        Object.entries(item.sizes.anak).filter(([, v]) => v > 0).forEach(([k, v]) => spA.push(`${k}:${v}`));
+        t += `\n\n*Item ${idx + 1}: ${JENIS_LABEL[item.jenis]}*\n`;
+        t += `- Warna: ${item.warna}\n`;
+        if (spD.length) t += `- Ukuran Dewasa: ${spD.join(', ')}\n`;
+        if (spA.length) t += `- Ukuran Anak: ${spA.join(', ')}\n`;
+        t += `- Total PCS: ${pcs}\n`;
+      });
+      const tot = items.reduce((a, it) => a + pcsOf(it), 0);
+      t += `\n*Total: ${items.length} item, ${tot} pcs*\n_Order = Setuju S&K Clovertees_`;
+      return t;
+    }
+
+    // ════════════════════════════════════════════════════
+    //  FILE TO BASE64
+    // ════════════════════════════════════════════════════
+    function fileToBase64(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result.split(',')[1]);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    // ════════════════════════════════════════════════════
+    //  BUILD PAYLOAD  (async — encode file ke base64)
+    // ════════════════════════════════════════════════════
+    async function buildPayload() {
+      const processFiles = async (fileList) => {
+        return Promise.all(fileList.map(async (f) => {
+          if (f.file && !f.tooBig) {
+            const b64 = await fileToBase64(f.file);
+            return { name: f.name, mimeType: f.file.type || 'application/octet-stream', data: b64 };
+          }
+          // File tidak ada atau terlalu besar — kirim nama saja
+          return { name: f.name || '', mimeType: '', data: '', tooBig: f.tooBig || false };
+        }));
+      };
+      const itemsWithFiles = await Promise.all(items.map(async item => ({
+        jenis: item.jenis,
+        warna: item.warna,
+        sizes: { dewasa: item.sizes.dewasa, anak: item.sizes.anak },
+        desain: {
+          depan: { text: item.desain.depan.text, files: await processFiles(item.desain.depan.files) },
+          belakang: { text: item.desain.belakang.text, files: await processFiles(item.desain.belakang.files) },
+          lengan: { text: item.desain.lengan.text, files: await processFiles(item.desain.lengan.files) }
+        }
+      })));
+      return {
+        nama: document.getElementById('nama').value.trim(),
+        whatsapp: document.getElementById('wa').value.trim(),
+        instagram: document.getElementById('ig').value.trim(),
+        alamat: document.getElementById('alamat').value.trim(),
+        items: itemsWithFiles,
+      };
+    }
+
+    // ════════════════════════════════════════════════════
+    //  SEND ORDER  ← fungsi utama yang diupgrade
+    //  Alur: encode file → kirim ke GAS → dapat no_pesanan
+    //        → tampil modal sukses → buka WA → reset form
+    // ════════════════════════════════════════════════════
+    let _lastWaText = '';
+
+    async function sendOrder() {
+      if (!validate()) return;
+
+      // Hitung info file
+      const allFiles = items.flatMap(it =>
+        ['depan', 'belakang', 'lengan'].flatMap(s => it.desain[s].files.filter(f => f.file))
+      );
+      const hasFiles = allFiles.length > 0;
+      const totalSizeMB = allFiles.reduce((a, f) => a + (f.file?.size || 0), 0) / (1024 * 1024);
+
+      const btn = document.querySelector('.btn-wa');
+      const origHTML = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="animation:spin 1s linear infinite;flex-shrink:0"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg> Memproses...`;
+
+      showUploadProgress(hasFiles, totalSizeMB, allFiles.length);
+
+      try {
+        // Step 1: encode file ke base64
+        updateUploadProgress(15, 'Mempersiapkan data...');
+        const payload = await buildPayload();
+
+        // Step 2: kirim ke GAS
+        updateUploadProgress(40, hasFiles
+          ? `Mengupload ${allFiles.length} file ke Database Clovertees...`
+          : 'Menyimpan data ke Database Clovertees...');
+
+        const res = await fetch(GAS_URL, { method: 'POST', body: JSON.stringify(payload) });
+
+        updateUploadProgress(85, 'Menyimpan ke Database Clovertees...');
+        const json = await res.json();
+
+        if (json.result === 'success') {
+          updateUploadProgress(100, 'Selesai! ✅');
+          await new Promise(r => setTimeout(r, 500)); // biar progress 100% keliatan
+          hideUploadProgress();
+
+          _lastWaText = buildWAText(json.no_pesanan);
+          showSuccessModal(json.no_pesanan, json.total_pcs);
+
+          // Buka WA otomatis setelah 900ms
+          setTimeout(() => {
+            window.location.href = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(_lastWaText)}`;
+            resetForm();
+          }, 900);
+
+        } else {
+          throw new Error(json.message || 'Server error');
+        }
+
+      } catch (err) {
+        hideUploadProgress();
+        toast(`❌ Gagal: ${err.message}`, '#e74c3c');
+        // Fallback: buka WA manual tanpa no pesanan
+        setTimeout(() => {
+          window.location.href = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(buildWAText('MANUAL-CEK-ADMIN'))}`;
+        }, 2500);
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = origHTML;
+      }
+    }
+
+    // ════════════════════════════════════════════════════
+    //  UPLOAD PROGRESS UI
+    // ════════════════════════════════════════════════════
+    function showUploadProgress(hasFiles, totalMB, fileCount) {
+      hideUploadProgress();
+      const wrap = document.createElement('div');
+      wrap.id = 'uploadProgress';
+      wrap.className = 'upload-progress-wrap';
+      const subText = hasFiles
+        ? `Mengupload ${fileCount} file (${totalMB.toFixed(1)} MB) ke Google Drive...`
+        : 'Menyimpan data pesanan ...';
+      wrap.innerHTML = `
+    <div class="upload-progress-box">
+      <div style="font-size:36px;margin-bottom:10px">${hasFiles ? '☁️' : '📋'}</div>
+      <div class="upload-progress-title">Mohon Tunggu</div>
+      <div class="upload-progress-sub">${subText}</div>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-fill" id="progressFill" style="width:10%"></div>
+      </div>
+      <div class="progress-label" id="progressLabel">Memulai...</div>
+      ${hasFiles && totalMB > 3 ? `<div style="font-size:11px;color:var(--muted);margin-top:10px;background:#f4fdf7;border-radius:8px;padding:8px">
+        Estimasi waktu: ${Math.ceil(totalMB / 1.5)}–${Math.ceil(totalMB)} detik tergantung koneksi
+      </div>` : ''}
+    </div>
+    <style>@keyframes spin{to{transform:rotate(360deg)}}</style>`;
+      document.body.appendChild(wrap);
+    }
+    function updateUploadProgress(pct, label) {
+      const fill = document.getElementById('progressFill');
+      const lbl = document.getElementById('progressLabel');
+      if (fill) fill.style.width = pct + '%';
+      if (lbl) lbl.textContent = label;
+    }
+    function hideUploadProgress() {
+      document.getElementById('uploadProgress')?.remove();
+    }
+
+    // ════════════════════════════════════════════════════
+    //  SUCCESS MODAL
+    // ════════════════════════════════════════════════════
+    function showSuccessModal(noPesanan, totalPcs) {
+      document.getElementById('successModal')?.remove();
+      const modal = document.createElement('div');
+      modal.id = 'successModal';
+      modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.52);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;animation:mfadeIn .25s ease';
+      modal.innerHTML = `
+    <div style="background:#fff;border-radius:20px;padding:28px 22px;max-width:340px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.22)">
+      <div style="font-size:46px;margin-bottom:10px">🎉</div>
+      <h2 style="font-family:'Pacifico',cursive;color:#29a85e;font-size:21px;margin-bottom:5px">Pesanan Tercatat!</h2>
+      <p style="color:#7a9987;font-size:13px;margin-bottom:16px">Data & file desain berhasil disimpan</p>
+      <div style="background:#f4fdf7;border:2px solid #d4f5e4;border-radius:13px;padding:15px;margin-bottom:14px">
+        <div style="font-size:10px;font-weight:800;color:#7a9987;text-transform:uppercase;letter-spacing:.6px;margin-bottom:3px">Nomor Pesanan</div>
+        <div style="font-size:24px;font-weight:900;color:#1a2e23;letter-spacing:1px">${noPesanan}</div>
+        <div style="font-size:12px;color:#7a9987;margin-top:3px">Total: ${totalPcs} pcs</div>
+      </div>
+      <p style="color:#5a4400;font-size:12px;background:#fffbea;border-radius:9px;padding:9px;margin-bottom:14px">
+        WhatsApp akan terbuka otomatis. Form di-reset setelah ini.
+      </p>
+      <div style="display:flex;gap:8px">
+        <button onclick="document.getElementById('successModal').remove()" style="background:#e8f5ee;color:#29a85e;border:2px solid #d4f5e4;border-radius:11px;padding:11px 0;font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;cursor:pointer;flex:1">Tutup</button>
+        <button onclick="window.open('https://wa.me/${WA_NUMBER}?text='+encodeURIComponent(_lastWaText),'_blank')" style="background:#25d366;color:#fff;border:none;border-radius:11px;padding:11px 0;font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;cursor:pointer;flex:1">Buka WA Lagi</button>
+      </div>
+    </div>
+    <style>@keyframes mfadeIn{from{opacity:0}to{opacity:1}}</style>`;
+      document.body.appendChild(modal);
+    }
+
+    // ════════════════════════════════════════════════════
+    //  RESET FORM
+    // ════════════════════════════════════════════════════
+    function resetForm() {
+      ['nama', 'wa', 'ig', 'alamat'].forEach(id => {
+        const el = document.getElementById(id); if (el) el.value = '';
+      });
+      const agree = document.getElementById('agree');
+      if (agree) agree.checked = false;
+      items = []; uid = 0;
+      items.push(mkItem());
+      render();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      toast('Form berhasil di-reset untuk pesanan berikutnya', '#29a85e');
+    }
+
+    // ════════════════════════════════════════════════════
+    //  UTILS
+    // ════════════════════════════════════════════════════
+    function find(id) { return items.find(i => i.id === id); }
+    function toast(msg, bg = '#29a85e') {
+      const el = document.getElementById('toast');
+      el.textContent = msg; el.style.background = bg;
+      el.classList.add('show');
+      setTimeout(() => el.classList.remove('show'), 3200);
+    }
+  </script>
+</body>
+
+</html>
